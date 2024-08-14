@@ -53,7 +53,7 @@ const ProductCard = ({
 
       <div className="flex justify-between w-full items-end">
         <p>$ {price}</p>
-        {carts.find((cart) => cart.productId == id) ? (
+        {carts.find((cart) => cart.productId === id) ? (
           <button
             onClick={handleAddedBtn}
             className="text-xs border border-black rounded-md px-3 py-1 bg-black text-white"
