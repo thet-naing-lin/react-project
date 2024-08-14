@@ -26,7 +26,7 @@ const ProductCard = ({
       quantity: 1,
     };
     addToCart(newCart);
-    toast.success("Item is added to your cart");
+    toast.success("Item is added to your cart.");
   };
 
   const handleAddedBtn = (event) => {
