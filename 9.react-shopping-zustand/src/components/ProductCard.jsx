@@ -11,6 +11,7 @@ const ProductCard = ({
     price,
     image,
     rating: { rate },
+    slug,
   },
 }) => {
   //   console.log(props);
@@ -37,7 +38,7 @@ const ProductCard = ({
 
   // console.log(useNavigate());
   const handleOpenDetail = () => {
-    navigate(`/product-detail/${id}`);
+    navigate(`/product-detail/${slug}`);
   };
 
   return (

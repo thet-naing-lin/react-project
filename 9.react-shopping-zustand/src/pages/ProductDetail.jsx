@@ -9,14 +9,14 @@ import toast from "react-hot-toast";
 
 const ProductDetail = () => {
   // data ပြန်ပြတဲ့ချိန်မှာ prodcutId.producId ဆိုပြီးမရေးချင်လို့ destructure လုပ်ပြီးရေးထားတာ
-  const { productId } = useParams();
+  const { productSlug } = useParams();
   //   console.log(productId);
   //   console.log(useParams());
 
   const { products } = useProductStore();
   const { addToCart, carts } = useCartStore();
 
-  const currentProduct = products.find((product) => product.id == productId);
+  const currentProduct = products.find((product) => product.slug == productSlug);
   // const currentProduct = products.find((product) => product.id == productId.productId);
   // console.log(currentProduct);
   // console.log(productId);
@@ -44,12 +44,12 @@ const ProductDetail = () => {
           <div className="col-span-1">
             <img
               src={currentProduct.image}
-              className=" w-[200px] md:w-3/4 block md:mx-auto mb-5 md:mb-0"
+              className=" w-[200px] md:w-3/4 block mx-auto mb-5 md:mb-0"
               alt=""
             />
           </div>
           <div className="col-span-1 flex flex-col gap-5 items-start">
-            <h1 className="text-2xl font-bold">{currentProduct.title}</h1>
+            <h1 className="text-2xl font-bold mx-auto md:mx-0">{currentProduct.title}</h1>
             <p className="border bg-gray-300 inline-block px-4 py-2">
               {currentProduct.category}
             </p>
