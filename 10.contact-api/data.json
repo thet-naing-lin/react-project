@@ -1,0 +1,46 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "job": "sleep",
+      "is_done": true
+    },
+    {
+      "id": 3,
+      "job": "do assignment",
+      "is_done": false
+    },
+    {
+      "job": "exercise",
+      "is-done": false,
+      "id": 4
+    },
+    {
+      "job": "meet girls",
+      "is-done": true,
+      "id": 5
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Rio",
+      "phone": "999999999",
+      "id": 1
+    },
+    {
+      "id": 3,
+      "name": "Yu Yu",
+      "phone": "09454545454"
+    },
+    {
+      "name": "Xin",
+      "phone": "09555555555",
+      "id": 4
+    },
+    {
+      "name": "xin xiao",
+      "phone": "09555555555",
+      "id": 5
+    }
+  ]
+}
