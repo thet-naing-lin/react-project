@@ -2,16 +2,16 @@ import { create } from "zustand";
 
 const useCartStore = create((set) => ({
   carts: [
-    {
-      id: 1,
-      productId: 2,
-      quantity: 3,
-    },
-    {
-      id: 2,
-      productId: 7,
-      quantity: 2,
-    },
+    // {
+    //   id: 1,
+    //   productId: 2,
+    //   quantity: 3,
+    // },
+    // {
+    //   id: 2,
+    //   productId: 7,
+    //   quantity: 2,
+    // },
     // {
     //   id: 3,
     //   productId: 5,

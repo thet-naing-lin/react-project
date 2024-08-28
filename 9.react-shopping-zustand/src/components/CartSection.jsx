@@ -45,7 +45,7 @@ const CartSection = () => {
                 <p className="font-bold text-lg">{total.toFixed(2)}</p>
               </div>
               <div className="text-right">
-                <p className="text-gray-500">Test (5%)</p>
+                <p className="text-gray-500">Tax (5%)</p>
                 <p className="font-bold text-lg">{tax.toFixed(2)}</p>
               </div>
               <div className="text-right">

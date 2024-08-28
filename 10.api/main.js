@@ -8,20 +8,20 @@ const tableBody = document.querySelector("#tableBody");
 const taskRowTemplate = document.querySelector("#taskRowTemplate");
 
 const createRow = (tasks) => {
-  tasks.forEach(({title, description, status}) => {
-      const taskRow = taskRowTemplate.content.cloneNode(true);
+  tasks.forEach(({ title, description, status }) => {
+    const taskRow = taskRowTemplate.content.cloneNode(true);
 
-      const taskTitle = taskRow.querySelector("#task-title");
-      const taskDescription = taskRow.querySelector("#task-description");
-      const taskStatus = taskRow.querySelector("#task-status");
+    const taskTitle = taskRow.querySelector("#task-title");
+    const taskDescription = taskRow.querySelector("#task-description");
+    const taskStatus = taskRow.querySelector("#task-status");
 
-      taskTitle.innerText = title;
-      taskDescription.innerText = description;
-      taskStatus.innerText = status;
+    taskTitle.innerText = title;
+    taskDescription.innerText = description;
+    taskStatus.innerText = status;
 
-      tableBody.append(taskRow);
-  })
-}
+    tableBody.append(taskRow);
+  });
+};
 
 // const showTasks = (tasks) => {
 //   tasks.forEach((task) => {
@@ -43,8 +43,156 @@ const createRow = (tasks) => {
 //   });
 // };
 
-const handleFetchBtn = () => {
+const handleFetchBtn = async () => {
   console.log("click");
+
+  // const resp1 = await fetch("https://fakestoreapi.com/products/1");
+  // // console.log(resp1);
+  // const data1 = await resp1.json();
+  // console.log(data1);
+
+  // const resp2 = await fetch("https://fakestoreapi.com/products/2");
+  // const data2 = await resp2.json();
+  // console.log(data2);
+
+  // const resp3 = await fetch("https://fakestoreapi.com/products/3");
+  // const data3 = await resp3.json();
+  // console.log(data3);
+
+  // const resp4 = await fetch("https://fakestoreapi.com/products/4");
+  // const data4 = await resp4.json();
+  // console.log(data4);
+
+  // const resp5 = await fetch("https://fakestoreapi.com/products/5");
+  // const data5 = await resp5.json();
+  // console.log(data5);
+
+  // const resp = fetch("https://fakestoreapi.com/products/1");
+  // const data = resp.then((data) => data.text())
+  // data.then((result) => console.log(JSON.parse(result)))
+
+  // fetch("https://fakestoreapi.com/products/1")
+  //   .then((res) => res.json())
+  //   .then((products) => {
+  //     console.log(products);
+  //     fetch("https://fakestoreapi.com/products/2")
+  //       .then((res) => res.json())
+  //       .then((products) => {
+  //         console.log(products);
+  //         fetch("https://fakestoreapi.com/products/3")
+  //           .then((res) => res.json())
+  //           .then((products) => {
+  //             console.log(products);
+  //             fetch("https://fakestoreapi.com/products/4")
+  //               .then((res) => res.json())
+  //               .then((products) => {
+  //                 console.log(products);
+  //                 fetch("https://fakestoreapi.com/products/5")
+  //                   .then((res) => res.json())
+  //                   .then((products) => console.log(products));
+  //               });
+  //           });
+  //       });
+  //   });
+
+  const p = new Promise(function (resolve, reject) {
+    setTimeout(() => {
+      const val = Math.floor(Math.random() * 10);
+      console.log(val);
+
+      if (val > 5) {
+        resolve(val);
+      } else {
+        reject(val);
+      }
+    }, 1000);
+  })
+
+  p.then(
+    function (x) {
+      console.log(x, "success");
+    },
+    function (y) {
+      console.log(y, "fail");
+    }
+  );
+
+  // console.log(p);
+
+  p.catch((e) => {
+    console.log(e);
+  })
+
+  // p.finally(() => {
+  //   console.log("finish");
+  // })
+
+  // let x = 0;
+
+  // const p = new Promise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     resolve(5);
+  //   }, 1500);
+  // });
+
+  // p.then((data) => {
+  //   x = data;
+  //   console.log(x);
+  //   console.log(x = 5 ? "good" : "bad");
+  // })
+
+  // let x = 0;
+
+  // setTimeout(() => {
+  //   x = 5;
+  // },100);
+
+  // console.log(x);
+
+  // sync
+  // console.log("a");
+  // console.log("b");
+  // console.log("c");
+
+  // async
+  //  fetch("https://fakestoreapi.com/products/1")
+  // .then(res => res.json())
+  // .then(products => console.log(products))
+
+  // fetch("https://fakestoreapi.com/products/2")
+  // .then(res => res.json())
+  // .then(products => console.log(products))
+
+  // fetch("https://fakestoreapi.com/products/3")
+  // .then(res => res.json())
+  // .then(products => console.log(products))
+
+  // fetch("https://fakestoreapi.com/products/4")
+  // .then(res => res.json())
+  // .then(products => console.log(products))
+
+  // fetch("https://fakestoreapi.com/products/5")
+  // .then(res => res.json())
+  // .then(products => console.log(products))
+
+  // lone time sync process (ကြာနေလို့ async ဖစ်တာမဟုတ်ကြောင်းပြတာာပါ)
+  // console.log("start");
+  // let x = 0;
+  // for (let i = 0; i < 999999999; i++) {
+  //   x += i;
+  // }
+  // console.log(x);
+
+  //  fetch("https://fakestoreapi.com/products/1")
+  // .then(res => res.json())
+  // .then(products => console.log(products))
+
+  // setTimeout(() => {
+  //   console.log("hello");
+  // }, 1000);
+
+  // console.log("end");
+
   // const resp = fetch("http://localhost:5100/tasks");
   // console.log(resp);
   // console.log(resp.then((data) => console.log(data)));
@@ -63,14 +211,14 @@ const handleFetchBtn = () => {
   //   .then((res) => res.json())
   //   .then((data) => console.log(data));
 
-  fetch("http://localhost:5100/tasks")
-    .then((res) => res.json())
-    .then((data) => {
-      // data.forEach((data) =>
-      //   console.log(data.title, " | ",x data.description, " | ", data.status)
-      // );
-      createRow(data);
-    });
+  // fetch("http://localhost:5100/tasks")
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     // data.forEach((data) =>
+  //     //   console.log(data.title, " | ",x data.description, " | ", data.status)
+  //     // );
+  //     createRow(data);
+  //   });
 
   // fetch("http://localhost:5100/tasks/3")
   // .then((res) => res.json())
