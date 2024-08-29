@@ -28,6 +28,9 @@ const ProductCard = ({
     };
     addToCart(newCart);
     toast.success("Item is added to your cart.");
+    // toast("Item is added to your cart.", {
+    //   icon: "👀",
+    // });
   };
 
   const handleAddedBtn = (event) => {
