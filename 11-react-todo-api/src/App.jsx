@@ -26,7 +26,10 @@ const App = () => {
     const data = await resp.json();
     // console.log(data);
 
-    setTask([...tasks, data]);
+    // setTask([...tasks, data]);
+
+    // revalidation
+    fetchTasks();
     setSending(false);
   };
 
@@ -35,7 +38,8 @@ const App = () => {
       method: "DELETE",
     });
 
-    setTask(tasks.filter((task) => task.id !== id));
+    // setTask(tasks.filter((task) => task.id !== id));
+    fetchTasks();
   };
 
   const doneTask = async (id, currentState) => {
@@ -50,7 +54,8 @@ const App = () => {
     const data = await resp.json();
     // console.log(data);
 
-    setTask(tasks.map((el) => (el.id === id ? data : el)));
+    // setTask(tasks.map((el) => (el.id === id ? data : el)));
+    fetchTasks();
   };
 
   const fetchTasks = async () => {

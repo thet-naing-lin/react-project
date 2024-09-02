@@ -28,7 +28,7 @@ const SkeletonLoader = () => {
         </div>
       </div>
 
-      {/* <div className="flex justify-between border border-slate-300 p-3 mb-3 last:mb-0 rounded-md">
+      <div className="flex justify-between border border-slate-300 p-3 mb-3 last:mb-0 rounded-md">
         <div className="flex justify-between w-full">
           <div className="flex w-72 gap-3">
             <div className="bg-gray-300 w-5 h-5 rounded-sm"></div>
@@ -76,7 +76,7 @@ const SkeletonLoader = () => {
             </svg>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
