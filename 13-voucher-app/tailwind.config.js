@@ -6,9 +6,12 @@ export default {
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        header: ["Kode Mono", "system-ui"],
+        body: ["Edu VIC WA NT Beginner", "system-ui"],
+      },
+    },
   },
-  plugins: [
-    require('flowbite/plugin')
-]
-}
+  plugins: [require("flowbite/plugin")],
+};
