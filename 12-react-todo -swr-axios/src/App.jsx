@@ -3,7 +3,6 @@ import CreateTask from "./components/CreateTask";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
 import useSWR, { useSWRConfig } from "swr";
-import SkeletonLoader from "./components/SkeletonLoader";
 import axios from "axios";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -11,7 +10,9 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const App = () => {
   // const [tasks, setTask] = useState([]);
 
-  console.log(import.meta.env.VITE_BASE_URL);
+  const [addingTask, setAddingTask] = useState(false);
+
+  // console.log(import.meta.env.VITE_BASE_URL);
 
   const viteUrl = import.meta.env.VITE_BASE_URL;
 
@@ -21,6 +22,7 @@ const App = () => {
     fetcher
   );
 
+  // for revalidation
   const { mutate } = useSWRConfig();
 
   const toDoApi = axios.create({
@@ -31,6 +33,9 @@ const App = () => {
   });
 
   const addTask = async (newTask) => {
+    setAddingTask(true);
+    // isLoading == true;
+
     // server changes
     // const resp = await fetch("http://localhost:5100/tasks", {
     //   method: "POST",
@@ -55,6 +60,8 @@ const App = () => {
     mutate(`${viteUrl}/tasks`);
 
     // setTask([...tasks, newTask]);
+    setAddingTask(false);
+    // isLoading == false;
   };
 
   const removeTask = async (id) => {
@@ -108,7 +115,7 @@ const App = () => {
   return (
     <div className="p-10">
       <Header />
-      <CreateTask addTask={addTask} />
+      <CreateTask addTask={addTask} addingTask={addingTask} />
 
       {/* {isLoading ? (
         <SkeletonLoader />
