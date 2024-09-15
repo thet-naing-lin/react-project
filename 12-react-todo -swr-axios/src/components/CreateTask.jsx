@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { newtonsCradle } from 'ldrs'
+import toast from "react-hot-toast";
 
 const CreateTask = ({ addTask, addingTask }) => {
   newtonsCradle.register()
@@ -21,7 +22,7 @@ const CreateTask = ({ addTask, addingTask }) => {
       };
       addTask(newTask);
       setJob("");
-      // toast.success("Add Task Successfully.")
+      toast.success("Add Task Successfully.")
     } else {
       alert("Need to fill in the text box.");
     }

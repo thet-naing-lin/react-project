@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import TaskList from "./components/TaskList";
 import useSWR, { useSWRConfig } from "swr";
 import axios from "axios";
+import { Toaster } from "react-hot-toast";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -54,6 +55,7 @@ const App = () => {
     //   },
     // });
 
+    // using axios
     await toDoApi.post("/", newTask);
 
     // revalidation
@@ -128,7 +130,9 @@ const App = () => {
         removeTask={removeTask}
         doneTask={doneTask}
         isLoading={isLoading}
+        addingTask={addingTask}
       />
+      <Toaster />
     </div>
   );
 };

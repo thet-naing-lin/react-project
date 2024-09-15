@@ -3,7 +3,7 @@
     {
       "id": 1,
       "task": "Finish project report",
-      "isDone": false
+      "isDone": true
     },
     {
       "id": 2,
@@ -16,7 +16,7 @@
     {
       "id": 3,
       "task": "Schedule meeting with client",
-      "isDone": true,
+      "isDone": false,
       "headers": {
         "Content-Type": "application/json"
       }

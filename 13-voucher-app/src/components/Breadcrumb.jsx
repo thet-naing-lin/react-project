@@ -11,18 +11,35 @@ const Breadcrumb = ({ currentPageTitle, icon, links }) => {
           <li className="inline-flex items-center">
             <Link
               to="/"
-              className="inline-flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
+              className="inline-flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-teal-400 dark:text-gray-400 dark:hover:text-white"
             >
               <TbHomeFilled />
               Home
             </Link>
           </li>
+ 
+          {links &&
+            links.map((link, index) => (
+              <li key={index}>
+                <div className="flex items-center">
+                  <IoMdArrowDropright className="size-5" />
+                  <Link
+                    to={link.path}
+                    className="flex items-center gap-1 ms-1 text-sm font-medium text-gray-400 hover:text-teal-400 md:ms-2 dark:text-gray-400 dark:hover:text-white"
+                  >
+                    {link.icon}
+                    {link.title}
+                  </Link>
+                </div>
+              </li>
+            ))}
+
           <li>
             <div className="flex items-center">
-              <IoMdArrowDropright className="size-5"/>
+              <IoMdArrowDropright className="size-5" />
               <Link
                 to="#"
-                className="flex items-center gap-1 ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
+                className="flex items-center gap-1 ms-1 text-sm font-medium text-gray-900 hover:text-teal-400 md:ms-2 dark:text-gray-400 dark:hover:text-white"
               >
                 {icon}
                 {currentPageTitle}

@@ -2,7 +2,7 @@ import React from "react";
 import Task from "./Task";
 import SkeletonLoader from "./SkeletonLoader";
 
-const TaskList = ({ tasks, removeTask, doneTask, isLoading }) => {
+const TaskList = ({ tasks, removeTask, doneTask, isLoading, addingTask }) => {
   // console.log(tasks);
   return (
     <div className=" font-body">
@@ -26,6 +26,8 @@ const TaskList = ({ tasks, removeTask, doneTask, isLoading }) => {
           />
         ))
       )}
+
+      {addingTask && <SkeletonLoader />}
     </div>
   );
 };

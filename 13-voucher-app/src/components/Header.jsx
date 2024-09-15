@@ -6,10 +6,12 @@ const Header = () => {
   return (
     <header className="font-header mb-5">
       <Container>
-        <Link to={"/"}>
-          <h1 className="text-3xl font-bold">Voucher App</h1>
+        <div>
+          <Link to={"/"} className="text-3xl font-bold">
+            Voucher App
+          </Link>
           <p className="text-zinc-400">MMS IT Solutions</p>
-        </Link>
+        </div>
       </Container>
     </header>
   );
