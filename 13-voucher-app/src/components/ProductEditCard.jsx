@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { hourglass } from "ldrs";
 import toast from "react-hot-toast";
-import { FcCheckmark } from "react-icons/fc";
+import { FcApproval } from "react-icons/fc";
 import useSWR, { useSWRConfig } from "swr";
 import ProductEditSkeletonLoader from "./ProductEditSkeletonLoader";
 
@@ -49,7 +49,7 @@ const ProductEditCard = () => {
 
     setIsCreating(false);
     toast("Product Updated Successfully!", {
-      icon: <FcCheckmark className="text-xl" />,
+      icon: <FcApproval className="text-xl" />,
       style: {
         borderRadius: "10px",
         background: "#333",
@@ -99,7 +99,7 @@ const ProductEditCard = () => {
                 />
 
                 {errors.product_name?.type === "required" && (
-                  <p className="text-red-500 text-sm text-sm">
+                  <p className="text-red-500 text-sm">
                     Product name is required
                   </p>
                 )}
@@ -186,7 +186,7 @@ const ProductEditCard = () => {
 
               <button
                 type="submit"
-                className=" inline-flex gap-1 px-5 py-2.5 text-black bg-teal-400 hover:bg-teal-500 hover:text-white  font-medium rounded-lg text-sm w-full sm:w-auto  text-center dark:bg-teal-600 dark:hover:bg-teal-700"
+                className=" inline-flex gap-1 px-5 py-2.5 justify-center text-center text-black bg-teal-400 hover:bg-teal-500 hover:text-white  font-medium rounded-lg text-sm w-full sm:w-auto dark:bg-teal-600 dark:hover:bg-teal-700"
               >
                 Update
                 {isCreating && (

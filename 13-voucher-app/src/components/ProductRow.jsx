@@ -5,7 +5,7 @@ import { useSWRConfig } from "swr";
 import Swal from "sweetalert2";
 import { lineSpinner } from "ldrs";
 import toast from "react-hot-toast";
-import { FcCheckmark } from "react-icons/fc";
+import { FcCancel } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
 const ProductRow = ({
@@ -55,7 +55,7 @@ const ProductRow = ({
         mutate(`${import.meta.env.VITE_API_URL}/products`);
 
         toast(`${product_name} deleted successfully`, {
-          icon: <FcCheckmark className="text-xl" />,
+          icon: <FcCancel className="text-xl" />,
           style: {
             borderRadius: "10px",
             background: "#333",

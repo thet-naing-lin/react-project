@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { hourglass } from "ldrs";
 import toast from "react-hot-toast";
-import { FcCheckmark } from "react-icons/fc";
+import { FcApproval } from "react-icons/fc";
+import useProductCreateStore from "../stores/useProductCreateStore";
 
 hourglass.register();
 
@@ -17,11 +18,11 @@ const ProductCreateCard = () => {
 
   const navigate = useNavigate();
 
-  const [isCreating, setIsCreating] = useState(false);
+  const { setAddingProduct, isAddingProduct } = useProductCreateStore();
 
   const handleCreateProduct = async (data) => {
     // console.log(data);
-    setIsCreating(true);
+    setAddingProduct(true);
 
     // data.created_at = new Date().toISOString();
 
@@ -37,10 +38,9 @@ const ProductCreateCard = () => {
       }),
     });
 
-    setIsCreating(false);
     reset();
     toast("Product created successfully!", {
-      icon: <FcCheckmark className="text-xl" />,
+      icon: <FcApproval className="text-xl" />,
       style: {
         borderRadius: "10px",
         background: "#333",
@@ -51,6 +51,8 @@ const ProductCreateCard = () => {
     if (data.back_to_product_list) {
       navigate("/product");
     }
+
+    setTimeout(() => setAddingProduct(false), 1500);
   };
 
   return (
@@ -127,7 +129,9 @@ const ProductCreateCard = () => {
             )}
 
             {errors.price?.type === "min" && (
-              <p className="text-red-500 text-sm">Product price must be at least 100</p>
+              <p className="text-red-500 text-sm">
+                Product price must be at least 100
+              </p>
             )}
 
             {errors.price?.type === "max" && (
@@ -181,10 +185,10 @@ const ProductCreateCard = () => {
 
           <button
             type="submit"
-            className=" inline-flex gap-1 px-5 py-2.5 text-black bg-teal-400 hover:bg-teal-500 hover:text-white  font-medium rounded-lg text-sm w-full sm:w-auto  text-center dark:bg-teal-600 dark:hover:bg-teal-700"
+            className=" inline-flex gap-1 justify-center px-5 py-2.5 text-black bg-teal-400 hover:bg-teal-500 hover:text-white  font-medium rounded-lg text-sm w-full sm:w-auto  text-center dark:bg-teal-600 dark:hover:bg-teal-700"
           >
             Create
-            {isCreating && (
+            {isAddingProduct && (
               <l-hourglass
                 size="15"
                 bg-opacity="0.2"
