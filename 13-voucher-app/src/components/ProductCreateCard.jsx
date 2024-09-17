@@ -52,7 +52,7 @@ const ProductCreateCard = () => {
       navigate("/product");
     }
 
-    setTimeout(() => setAddingProduct(false), 1500);
+    setTimeout(() => setAddingProduct(false), 500);
   };
 
   return (
