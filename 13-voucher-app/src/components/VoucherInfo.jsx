@@ -47,9 +47,10 @@ const VoucherInfo = () => {
     const total = records.reduce((x, y) => x + y.cost, 0);
     const tax = total * 0.05;
     const netTotal = total + tax;
+    const created_at = new Date().toISOString();
 
     // console.log({...data, records, total, tax, netTotal});
-    const currentVoucher = { ...data, records, total, tax, netTotal };
+    const currentVoucher = { ...data, records, total, tax, netTotal, created_at };
 
     await fetch(`${import.meta.env.VITE_API_URL}/vouchers`, {
       method: "POST",

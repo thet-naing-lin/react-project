@@ -18,10 +18,27 @@ const VoucherListRow = ({
     sale_date,
     netTotal,
     records,
+    created_at,
   },
   index,
 }) => {
   // console.log(voucher);
+
+  const date = new Date(sale_date);
+
+  const currentDate = date.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
+  const time = new Date(created_at);
+
+  const currentTime = time.toLocaleTimeString("en-GB", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
 
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -78,7 +95,9 @@ const VoucherListRow = ({
       <td className="px-6 py-4 text-end">{netTotal.toFixed(2)}</td>
       <td className="px-6 py-4 text-end">{records.length}</td>
       <td className="px-6 py-4 text-end ">
-        <ShowDate timestamp={sale_date} />
+        {/* <ShowDate timestamp={sale_date} /> */}
+        <p className=" text-xs text-[10px]">{currentDate}</p>
+        <p className=" text-xs text-[10px]">{currentTime}</p>
       </td>
       <td className="px-6 py-4 text-end">
         <div className="inline-flex rounded-md" role="group">
