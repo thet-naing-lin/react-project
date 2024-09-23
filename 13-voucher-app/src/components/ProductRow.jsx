@@ -7,6 +7,7 @@ import { lineSpinner } from "ldrs";
 import toast from "react-hot-toast";
 import { FcCancel } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import ShowDate from "./ShowDate";
 
 const ProductRow = ({
   product: { id, product_name, price, created_at },
@@ -14,35 +15,22 @@ const ProductRow = ({
 }) => {
   const { mutate } = useSWRConfig();
   const [isDeleting, setIsDeleting] = useState(false);
-
+  // console.log(created_at);
   lineSpinner.register();
-
-  // for date and time
-  const date = new Date(created_at);
-
-  const currentDate = date.toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-  const currentTime = date.toLocaleTimeString("en-GB", {
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-  });
 
   const handleDeleteBtn = async () => {
     // console.log(id);
 
     await Swal.fire({
       title: "Are you sure to delete?",
+      text: `(${product_name})`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#16bdca",
-      cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
       customClass: {
         confirmButton: "swal-confirm-text",
+        text: "swal-text",
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -52,7 +40,7 @@ const ProductRow = ({
           method: "DELETE",
         });
 
-        mutate(`${import.meta.env.VITE_API_URL}/products`);
+        // mutate(`${import.meta.env.VITE_API_URL}/products`);
 
         toast(`${product_name} deleted successfully`, {
           icon: <FcCancel className="text-xl" />,
@@ -80,8 +68,7 @@ const ProductRow = ({
       </th>
       <td className="px-6 py-4 text-end">{price}</td>
       <td className="px-6 py-4 text-end">
-        <p className=" text-xs">{currentDate}</p>
-        <p className=" text-xs">{currentTime}</p>
+        <ShowDate timestamp={created_at} />
       </td>
       <td className="px-6 py-4 text-end">
         <div className="inline-flex rounded-md" role="group">

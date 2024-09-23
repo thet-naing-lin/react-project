@@ -4,7 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .swal-confirm-text {
-    color: black;
+  color: black;
+}
+
+.swal-text {
+  font-size: 20px;
+  color: #71717a;
 }

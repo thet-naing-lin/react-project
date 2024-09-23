@@ -66,13 +66,14 @@ const ProductCreateCard = () => {
         <div>
           <div className="mb-10">
             <label
-              htmlFor="first_name"
+              htmlFor="product_name"
               className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white`}
             >
               New Product Name
             </label>
             <input
               type="text"
+              id="product_name"
               {...register("product_name", {
                 required: true,
                 minLength: 3,
@@ -104,13 +105,14 @@ const ProductCreateCard = () => {
           </div>
           <div className="mb-10">
             <label
-              htmlFor="last_name"
+              htmlFor="product_price"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Product Price
             </label>
             <input
               type="number"
+              id="product_price"
               {...register("price", {
                 required: true,
                 min: 100,
