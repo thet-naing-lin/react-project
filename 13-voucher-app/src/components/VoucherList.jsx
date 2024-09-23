@@ -1,10 +1,10 @@
 import React from "react";
 
 import { HiShoppingCart } from "react-icons/hi2";
-import { Link } from "react-router-dom";
 import SearchBtnCreateBtn from "./SearchBtnCreateBtn";
 import useSWR from "swr";
 import VoucherListRow from "./VoucherListRow";
+import VoucherListSkeletonLoader from "./VoucherListSkeletonLoader";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const VoucherList = () => {
@@ -52,20 +52,23 @@ const VoucherList = () => {
           </thead>
 
           <tbody className="text-md">
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 hidden last:table-row">
-              <td colSpan={5} className="text-center text-xl px-6 py-10">
+            <tr className="bg-white font-header border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 hidden last:table-row">
+              <td colSpan={7} className="text-center text-xl px-6 py-10">
                 There is no voucher.
               </td>
             </tr>
 
-            {!isLoading &&
+            {isLoading ? (
+              <VoucherListSkeletonLoader />
+            ) : (
               data?.map((voucher, index) => (
                 <VoucherListRow
                   key={voucher.id}
                   voucher={voucher}
                   index={index}
                 />
-              ))}
+              ))
+            )}
           </tbody>
         </table>
       </div>
