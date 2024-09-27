@@ -45,7 +45,7 @@ const VoucherDetailCard = () => {
             </div>
           </div>
 
-          <div className=" rounded-lg font-header">
+          <div className=" font-header">
             <table className="w-full text-left border border-teal-900 mb-5">
               <thead>
                 <tr className="bg-teal-900 text-white">
@@ -73,7 +73,7 @@ const VoucherDetailCard = () => {
             </table>
 
             <div className="flex flex-col items-end space-y-5">
-              <div className=" border border-teal-900  px-8 py-2 w-80">
+              <div className=" border rounded-md border-teal-900  px-8 py-2 w-80">
                 <p className=" flex justify-between">
                   <span>Sub Total:</span>
                   <span>{data.total.toFixed(2)}</span>
@@ -84,7 +84,7 @@ const VoucherDetailCard = () => {
                 </p>
               </div>
 
-              <div className=" bg-teal-900 text-white text-xl uppercase px-8 py-2 w-80">
+              <div className=" bg-teal-900 rounded-md text-white text-xl uppercase px-8 py-2 w-80">
                 <p className=" flex justify-between">
                   <span>TOTAL:</span>
                   <span>{data.netTotal.toFixed(2)} MMK</span>

@@ -24,7 +24,7 @@ const VoucherListRow = ({
   },
   index,
 }) => {
-  console.log(records);
+  // console.log(records);
 
   const date = new Date(sale_date);
 
