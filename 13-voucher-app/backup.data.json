@@ -4,19 +4,13 @@
       "id": 1,
       "product_name": "Performance Optimization Service",
       "price": 100,
-      "created_at": "2024-09-14T12:30:45Z"
-    },
-    {
-      "id": 2,
-      "product_name": "Custom Website Design",
-      "price": 1200,
-      "created_at": "2024-08-13T09:00:00Z"
+      "created_at": "2024-09-14T06:30:45Z"
     },
     {
       "id": 3,
       "product_name": "SEO Optimization Service",
       "price": 300,
-      "created_at": "2024-09-12T14:15:30Z"
+      "created_at": "2024-09-12T12:00:00Z"
     },
     {
       "id": 4,
@@ -110,97 +104,8 @@
       "total": 1600.63,
       "tax": 80.03150000000001,
       "netTotal": 1680.6615000000002,
+      "created_at": "2024-07-07T22:33:26.564Z",
       "id": 1
-    },
-    {
-      "voucher_id": "INV-20240922-6181",
-      "customer_name": "Ai Hui",
-      "customer_email": "aihui@gmail.com",
-      "sale_date": "2024-09-26",
-      "all_correct": "true",
-      "submit": "",
-      "records": [
-        {
-          "id": "543a145a-9740-417a-b388-baf747401764",
-          "product": {
-            "id": 7,
-            "product_name": "CMS Integration Service",
-            "price": 500,
-            "created_at": "2024-09-08T11:30:00Z"
-          },
-          "quantity": 6,
-          "cost": 3000,
-          "created_at": "2024-09-22T13:46:09.189Z"
-        },
-        {
-          "id": "09055a67-6f0b-4920-925a-ba1e3bd9cb99",
-          "product": {
-            "id": 5,
-            "product_name": "E-commerce Setup Service",
-            "price": 1500,
-            "created_at": "2024-09-10T16:20:15Z"
-          },
-          "quantity": "1",
-          "cost": 1500,
-          "created_at": "2024-09-22T13:46:16.087Z"
-        }
-      ],
-      "total": 4500,
-      "tax": 225,
-      "netTotal": 4725,
-      "id": 3
-    },
-    {
-      "voucher_id": "INV-20240922-2114",
-      "customer_name": "chocho",
-      "customer_email": "chocho@gmail.com",
-      "sale_date": "2024-09-22",
-      "all_correct": "true",
-      "submit": "",
-      "records": [
-        {
-          "id": "aca541d8-703b-4201-af07-8a6e1bcb69b3",
-          "product": {
-            "id": 3,
-            "product_name": "SEO Optimization Service",
-            "price": 300,
-            "created_at": "2024-09-12T14:15:30Z"
-          },
-          "quantity": "3",
-          "cost": 900,
-          "created_at": "2024-09-22T14:02:23.774Z"
-        }
-      ],
-      "total": 900,
-      "tax": 45,
-      "netTotal": 945,
-      "id": 5
-    },
-    {
-      "voucher_id": "INV-20240922-2572",
-      "customer_name": "Tommy",
-      "customer_email": "tommy@gmail.com",
-      "sale_date": "2024-09-07",
-      "all_correct": "true",
-      "submit": "",
-      "records": [
-        {
-          "id": "7483e53a-5b7d-4a47-8ea3-4feea8890771",
-          "product": {
-            "id": 2,
-            "product_name": "Custom Website Design",
-            "price": 1200,
-            "created_at": "2024-08-13T09:00:00Z"
-          },
-          "quantity": "3",
-          "cost": 3600,
-          "created_at": "2024-09-22T14:27:10.056Z"
-        }
-      ],
-      "total": 3600,
-      "tax": 180,
-      "netTotal": 3780,
-      "id": 6
     },
     {
       "voucher_id": "INV-20240922-3190",
@@ -226,45 +131,86 @@
       "total": 300000,
       "tax": 15000,
       "netTotal": 315000,
+      "created_at": "2023-12-01T06:14:58.452Z",
       "id": 7
     },
     {
-      "voucher_id": "INV-20240922-3744",
-      "customer_name": "Ai Hui",
-      "customer_email": "aihui@gmail.com",
-      "sale_date": "2024-08-29",
+      "voucher_id": "INV-20240923-3283",
+      "customer_name": "Tommy",
+      "customer_email": "tommy@gmail.com",
+      "sale_date": "2024-08-31",
       "all_correct": "true",
       "submit": "",
       "records": [
         {
-          "id": "b2b0ad5e-65c3-4816-9906-40c108c6aa68",
+          "id": "363c09cf-43d2-4eff-a6c5-594f51c1ae2e",
           "product": {
-            "id": 4,
-            "product_name": "Responsive Website Development",
-            "price": 800,
-            "created_at": "2024-09-11T10:45:00Z"
+            "id": 5,
+            "product_name": "E-commerce Setup Service",
+            "price": 1500,
+            "created_at": "2024-09-10T16:20:15Z"
           },
-          "quantity": "3",
-          "cost": 2400,
-          "created_at": "2024-09-22T14:48:18.232Z"
+          "quantity": "1",
+          "cost": 1500,
+          "created_at": "2024-09-23T11:50:15.032Z"
         },
         {
-          "id": "b9166806-fae0-4345-8de0-0244de845894",
+          "id": "f9efbd0f-b894-42b0-ad09-749024ed31e4",
           "product": {
-            "product_name": "Testing Service",
-            "price": "100000",
-            "created_at": "2024-09-22T14:39:08.069Z",
-            "id": 11
+            "id": 2,
+            "product_name": "Custom Website Design",
+            "price": 1200,
+            "created_at": "2024-08-13T09:00:00Z"
           },
-          "quantity": "2",
-          "cost": 200000,
-          "created_at": "2024-09-22T14:48:21.242Z"
+          "quantity": "3",
+          "cost": 3600,
+          "created_at": "2024-09-23T11:50:18.043Z"
         }
       ],
-      "total": 202400,
-      "tax": 10120,
-      "netTotal": 212520,
-      "id": 8
+      "total": 5100,
+      "tax": 255,
+      "netTotal": 5355,
+      "created_at": "2024-09-23T11:50:20.127Z",
+      "id": 11
+    },
+    {
+      "voucher_id": "INV-20240923-2750",
+      "customer_name": "Thresh",
+      "customer_email": "thersh@gmail.com",
+      "sale_date": "2024-09-07",
+      "all_correct": "true",
+      "submit": "",
+      "records": [
+        {
+          "id": "3b2c162f-f123-40f5-99a5-497e67f0f1c5",
+          "product": {
+            "id": 2,
+            "product_name": "Custom Website Design",
+            "price": 1200,
+            "created_at": "2024-08-13T09:00:00Z"
+          },
+          "quantity": 5,
+          "cost": 6000,
+          "created_at": "2024-09-23T16:29:23.712Z"
+        },
+        {
+          "id": "e67149ac-49b3-407f-9803-1da5bde1b015",
+          "product": {
+            "id": 5,
+            "product_name": "E-commerce Setup Service",
+            "price": 1500,
+            "created_at": "2024-09-10T16:20:15Z"
+          },
+          "quantity": "5",
+          "cost": 7500,
+          "created_at": "2024-09-23T16:29:28.547Z"
+        }
+      ],
+      "total": 13500,
+      "tax": 675,
+      "netTotal": 14175,
+      "created_at": "2024-09-23T16:30:00.350Z",
+      "id": 12
     }
   ]
 }

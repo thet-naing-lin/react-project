@@ -301,7 +301,7 @@ const VoucherInfo = () => {
           type="submit"
           form="voucherInfoForm"
           {...register("submit")}
-          className=" inline-flex gap-1 justify-center px-5 py-2.5 text-white bg-teal-500 hover:bg-teal-500 hover:text-white  font-medium rounded-lg text-sm w-full sm:w-auto  text-center dark:bg-teal-600 dark:hover:bg-teal-700"
+          className=" inline-flex gap-1 justify-center px-5 py-2.5 text-white bg-teal-900 hover:scale-95 hover:text-white  font-medium rounded-lg text-sm w-full sm:w-auto  text-center dark:bg-teal-600 dark:hover:bg-teal-700"
         >
           Confirm Voucher
           {confirmVoucher && (

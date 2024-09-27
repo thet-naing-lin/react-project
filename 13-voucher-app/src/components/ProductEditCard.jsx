@@ -30,7 +30,7 @@ const ProductEditCard = () => {
     `${import.meta.env.VITE_API_URL}/products/${id}`,
     fetcher
   );
-
+  console.log(data);
   const handleEditProduct = async (data) => {
     // console.log(data);
     setIsCreating(true);

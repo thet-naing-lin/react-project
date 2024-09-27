@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import { FcCancel } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { lineSpinner } from "ldrs";
+import { FaInfoCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 lineSpinner.register();
 
@@ -22,7 +24,7 @@ const VoucherListRow = ({
   },
   index,
 }) => {
-  // console.log(voucher);
+  console.log(records);
 
   const date = new Date(sale_date);
 
@@ -81,33 +83,39 @@ const VoucherListRow = ({
   };
 
   return (
-    <tr className=" font-header text-[11px] bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+    <tr className=" font-header text-sm bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
       <td className="px-6 py-4"> {index + 1}</td>
 
       <td className="px-6 py-4 font-bold"> {voucher_id}</td>
-      <th
-        scope="row"
-        className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white"
-      >
+      <th scope="row" className="px-6 py-4  whitespace-nowrap dark:text-white">
         {customer_name}
       </th>
       <td className="px-6 py-4">{customer_email}</td>
-      <td className="px-6 py-4 text-end">{netTotal.toFixed(2)}</td>
       <td className="px-6 py-4 text-end">{records.length}</td>
       <td className="px-6 py-4 text-end ">
-        {/* <ShowDate timestamp={sale_date} /> */}
-        <p className=" text-xs text-[10px]">{currentDate}</p>
-        <p className=" text-xs text-[10px]">{currentTime}</p>
+        <ShowDate timestamp={sale_date} timeOnly={created_at} />
       </td>
       <td className="px-6 py-4 text-end">
         <div className="inline-flex rounded-md" role="group">
+          {/* Detail Button */}
+          <Link
+            to={`/voucher/detail/${id}`}
+            className="w-10 h-8 flex justify-center items-center text-sm 
+        text-blue-500 dark:text-blue-700 bg-transparent border-2 
+        border-blue-500 rounded-md hover:bg-blue-500 hover:text-white 
+        transition-all duration-300 ease-in-out mx-1"
+          >
+            <FaInfoCircle />
+          </Link>
+
+          {/* Delete Button */}
           <button
             type="button"
             onClick={handleDeleteVoucherBtn}
-            className=" w-10 h-8 flex justify-center items-center text-sm 
-    text-red-500 dark:text-red-700 bg-transparent border-2 
-    border-red-500 rounded-md hover:bg-red-500 hover:text-white 
-    transition-all duration-300 ease-in-out"
+            className="w-10 h-8 flex justify-center items-center text-sm 
+        text-red-500 dark:text-red-700 bg-transparent border-2 
+        border-red-500 rounded-md hover:bg-red-500 hover:text-white 
+        transition-all duration-300 ease-in-out mx-1"
           >
             {isDeleting ? (
               <l-line-spinner

@@ -70,19 +70,28 @@ const ProductRow = ({
       <td className="px-6 py-4 text-end">
         <ShowDate timestamp={created_at} />
       </td>
+
       <td className="px-6 py-4 text-end">
         <div className="inline-flex rounded-md" role="group">
+          {/* Edit Button */}
           <Link
             to={`/product/edit/${id}`}
-            className="w-10 h-8 flex justify-center items-center text-sm text-teal-600 dark:text-teal-500 bg-transparent border border-s-teal-500 border-t-teal-500 border-b-teal-500  rounded-s-md hover:opacity-60 focus:z-10"
+            className="w-10 h-8 flex justify-center items-center text-sm 
+        text-blue-500 dark:text-blue-700 bg-transparent border-2 
+        border-blue-500 rounded-md hover:bg-blue-500 hover:text-white 
+        transition-all duration-300 ease-in-out mx-1"
           >
             <RiEdit2Line />
           </Link>
 
+          {/* Delete Button */}
           <button
             type="button"
             onClick={handleDeleteBtn}
-            className="w-10 h-8 flex justify-center items-center text-sm text-red-500 dark:text-red-700 bg-transparent border border-teal-500 rounded-e-md hover:opacity-60 focus:z-10"
+            className="w-10 h-8 flex justify-center items-center text-sm 
+        text-red-500 dark:text-red-700 bg-transparent border-2 
+        border-red-500 rounded-md hover:bg-red-500 hover:text-white 
+        transition-all duration-300 ease-in-out mx-1"
           >
             {isDeleting ? (
               <l-line-spinner

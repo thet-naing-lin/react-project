@@ -12,8 +12,8 @@ const VoucherTable = () => {
   return (
     <div className="container mx-auto mb-7">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-sm text-gray-700 uppercase bg-teal-400 dark:bg-teal-600 dark:text-gray-400">
+        <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-white uppercase bg-teal-900 dark:bg-teal-600 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
                 #
@@ -95,7 +95,7 @@ const VoucherTable = () => {
                 Net Total
               </th>
               <td className="px-6 py-4 text-end" id="recordNetTotal">
-                {netTotal.toFixed(2)}
+                {netTotal.toFixed(2)} MMK
               </td>
               <td className="px-6 py-4 text-end table-cell print:hidden" />
             </tr>

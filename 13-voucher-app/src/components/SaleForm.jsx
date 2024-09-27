@@ -58,11 +58,11 @@ const SaleForm = () => {
   return (
     <div className="container mx-auto mb-7 block print:hidden">
       <form id="createRecordForm" onSubmit={handleSubmit(handleSaleForm)}>
-        <div className="grid grid-cols-5 gap-3 bg-teal-100 p-5 rounded shadow">
+        <div className="grid grid-cols-5 gap-3 bg-teal-900 p-5 rounded shadow">
           <div className="col-span-3">
             <label
               htmlFor="countries"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Select Product
             </label>
@@ -97,7 +97,7 @@ const SaleForm = () => {
           <div className="col-span-1">
             <label
               htmlFor="quantity"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white dark:text-white"
             >
               Amount
             </label>
@@ -132,7 +132,7 @@ const SaleForm = () => {
           <div className="col-span-1">
             <button
               type="submit"
-              className=" sm:w-28 md:w-32 lg:w-44 h-[70px] text-sm flex justify-center items-center text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-md text-center"
+              className=" sm:w-28 md:w-32 lg:w-44 h-[70px] text-sm flex justify-center items-center text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br  dark:focus:ring-teal-800  font-medium rounded-md text-center"
             >
               Add Product
             </button>

@@ -27,9 +27,9 @@ const ProductList = () => {
         btnName="Add New Product"
         url="/product/create"
       />
-      <div className="font-body relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className=" text-gray-900 uppercase bg-teal-400 dark:bg-gray-700 dark:text-gray-400">
+      <div className="font-body mt-5 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className=" text-white uppercase bg-teal-900 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
                 #

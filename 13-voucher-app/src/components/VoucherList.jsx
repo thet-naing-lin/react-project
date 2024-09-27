@@ -22,9 +22,9 @@ const VoucherList = () => {
         url={"/sale"}
       />
 
-      <div className="font-body relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-gray-900 uppercase bg-teal-400 dark:bg-gray-700 dark:text-gray-400">
+      <div className="font-body mt-5 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-white text-xs uppercase bg-teal-900 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
                 #
@@ -32,19 +32,16 @@ const VoucherList = () => {
               <th scope="col" className="px-6 py-3">
                 Voucher ID
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 text-nowrap">
                 Customer Name
               </th>
               <th scope="col" className="px-6 py-3">
                 Email
               </th>
-              <th scope="col" className="px-6 py-3 text-end">
-                Amount (MMK)
+              <th scope="col" className="px-6 py-3 text-end text-nowrap">
+                Item Count
               </th>
-              <th scope="col" className="px-6 py-3 text-end">
-                Product Count
-              </th>
-              <th scope="col" className="px-6 py-3 text-end">
+              <th scope="col" className="px-6 py-3 text-end text-nowrap">
                 Created At
               </th>
               <th scope="col" className="px-6 py-3 text-end"></th>
