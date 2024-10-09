@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import VoucherDetailRow from "./VoucherDetailRow";
 import VoucherDetailSkeletonLoader from "./VoucherDetailSkeletonLoader";
+import printJS from "print-js";
+import html2pdf from "html2pdf.js";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const VoucherDetailCard = () => {
@@ -23,76 +25,223 @@ const VoucherDetailCard = () => {
     hour12: true,
   });
 
+  const handlePrint = () => {
+    // window.print();
+
+    printJS({
+      printable: "printArea",
+      type: "html",
+      targetStyles: ["*"],
+      // scanStyles: true,
+      // css: [
+      //   "https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css",
+      // ],
+    });
+  };
+
+  const handlePDF = () => {
+    // console.log("export pdf");
+    const element = document.getElementById("printArea");
+
+    // Options for PDF generation
+    const opt = {
+      margin: 0.1,
+      filename: "invoice.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "in", format: "a5", orientation: "portrait" },
+    };
+
+    // Convert the element to PDF
+    html2pdf().from(element).set(opt).save();
+  };
+
   return (
     <div className=" mt-10">
       {isLoading ? (
         <VoucherDetailSkeletonLoader />
       ) : (
-        <div className=" font-mono">
-          <div className="flex justify-between mb-7">
-            <div className="">
-              <h1 className=" font-bold text-lg mb-2">INVOICE</h1>
-              <p>Invoice Number : {data?.voucher_id}</p>
-              <p>
-                Date : {data?.sale_date} ({saleTime})
-              </p>
+        <div className=" font-mono w-[14.8cm]">
+          <div id="printArea">
+            <div className="flex justify-between mb-7 text-sm">
+              <div>
+                <h1 className=" font-bold text-lg mb-2">INVOICE</h1>
+                <p className=" mb-2">{data?.voucher_id}</p>
+                <p>
+                  {data?.sale_date} ({saleTime})
+                </p>
+              </div>
+
+              <div>
+                <h3 className=" font-bold text-lg mb-2">Payment Information</h3>
+                <p>Name : {data?.customer_name}</p>
+                <p>Email : {data?.customer_email}</p>
+              </div>
             </div>
 
-            <div className="">
-              <h3 className=" font-bold text-lg mb-2">Payment Information</h3>
-              <p>Name : {data?.customer_name}</p>
-              <p>Email : {data?.customer_email}</p>
+            <div className=" font-header">
+              <table className="w-full text-left border border-teal-900 mb-5">
+                <thead>
+                  <tr className="bg-teal-900 text-white text-xs">
+                    <th className="py-3 px-4">ITEM</th>
+                    <th className="py-3 px-4">DESCRIPTION</th>
+                    <th className="py-3 px-4 text-end">RATE</th>
+                    <th className="py-3 px-4 text-end">Quantity</th>
+                    <th className="py-3 px-4 text-end">AMOUNT</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {!isLoading &&
+                    data?.records?.map((recordItem, index) => {
+                      // console.log(recordItem);
+                      return (
+                        <VoucherDetailRow
+                          key={recordItem.id}
+                          recordItem={recordItem}
+                          index={index}
+                        />
+                      );
+                    })}
+                </tbody>
+              </table>
+
+              <div className="flex flex-col items-end space-y-5 text-xs">
+                <div className=" border rounded-md border-teal-900  px-4 py-2 w-48">
+                  <p className=" flex justify-between">
+                    <span>Sub Total:</span>
+                    <span>{data.total.toFixed(2)}</span>
+                  </p>
+                  <p className=" flex justify-between">
+                    <span>Sub Tax:</span>
+                    <span>{data.tax.toFixed(2)}</span>
+                  </p>
+                </div>
+
+                <div className=" bg-teal-900 rounded-md text-white uppercase px-8 py-2 w-48 ">
+                  <p className=" flex justify-between">
+                    <span>TOTAL:</span>
+                    <span>{data.netTotal.toFixed(2)} MMK</span>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className=" font-header">
-            <table className="w-full text-left border border-teal-900 mb-5">
-              <thead>
-                <tr className="bg-teal-900 text-white">
-                  <th className="py-3 px-4">ITEM</th>
-                  <th className="py-3 px-4">DESCRIPTION</th>
-                  <th className="py-3 px-4 text-end">RATE</th>
-                  <th className="py-3 px-4 text-end">Quantity</th>
-                  <th className="py-3 px-4 text-end">AMOUNT</th>
-                </tr>
-              </thead>
+          <div className=" flex justify-end mt-5 gap-3">
+            <button
+              onClick={handlePDF}
+              className="flex items-center gap-2 text-white bg-teal-900 hover:scale-95 hover:text-white font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700"
+            >
+              Download PDF
+            </button>
 
-              <tbody>
-                {!isLoading &&
-                  data?.records?.map((recordItem, index) => {
-                    // console.log(recordItem);
-                    return (
-                      <VoucherDetailRow
-                        key={recordItem.id}
-                        recordItem={recordItem}
-                        index={index}
-                      />
-                    );
-                  })}
-              </tbody>
-            </table>
-
-            <div className="flex flex-col items-end space-y-5">
-              <div className=" border rounded-md border-teal-900  px-8 py-2 w-80">
-                <p className=" flex justify-between">
-                  <span>Sub Total:</span>
-                  <span>{data.total.toFixed(2)}</span>
-                </p>
-                <p className=" flex justify-between">
-                  <span>Sub Tax:</span>
-                  <span>{data.tax.toFixed(2)}</span>
-                </p>
-              </div>
-
-              <div className=" bg-teal-900 rounded-md text-white text-xl uppercase px-8 py-2 w-80">
-                <p className=" flex justify-between">
-                  <span>TOTAL:</span>
-                  <span>{data.netTotal.toFixed(2)} MMK</span>
-                </p>
-              </div>
-            </div>
+            <button
+              onClick={handlePrint}
+              className="flex items-center gap-2 text-white bg-teal-900 hover:scale-95 hover:text-white font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700"
+            >
+              Print
+            </button>
           </div>
         </div>
+        // <div className=" flex gap-5">
+        //   <div id="printArea" className="w-[14.8cm] bg-white ">
+        //     <div className="flex justify-between items-start mb-8">
+        //       <div>
+        //         <h1 className="text-4xl font-bold mb-2">INVOICE</h1>
+        //         <p className="text-xl">{data.voucher_id}</p>
+        //       </div>
+        //       <div className="text-right">
+        //         <p className="font-bold">Invoice to</p>
+        //         <p>{data.customer_name}</p>
+        //         <p>Date: {data.sale_date}</p>
+        //       </div>
+        //     </div>
+
+        //     <table className="w-full mb-8">
+        //       <thead>
+        //         <tr className="border-b-2 border-gray-300">
+        //           <th className="text-left py-2 text-sm">No</th>
+        //           <th className="text-left py-2 text-sm">Description</th>
+        //           <th className="text-right py-2 text-sm">Qty</th>
+        //           <th className="text-right py-2 text-sm">Price</th>
+        //           <th className="text-right py-2 text-sm">Total</th>
+        //         </tr>
+        //       </thead>
+        //       <tbody>
+        //         {data.records.map((record, index) => (
+        //           <tr key={record.id} className="border-b border-gray-200">
+        //             <td className="py-2 text-sm">{index + 1}</td>
+        //             <td className="py-2 text-sm">
+        //               {record.product.product_name}
+        //             </td>
+        //             <td className="text-right py-2 text-sm">
+        //               {record.quantity}
+        //             </td>
+        //             <td className="text-right py-2 text-sm">
+        //               {record.product.price}
+        //             </td>
+        //             <td className="text-right py-2 text-sm">{record.cost}</td>
+        //           </tr>
+        //         ))}
+        //       </tbody>
+        //       <tfoot>
+        //         <tr className="border-b border-gray-200">
+        //           <td className="py-2 text-right text-sm" colSpan={4}>
+        //             Total
+        //           </td>
+        //           <td className="py-2 text-right text-sm">
+        //             {data.total.toFixed(2)}
+        //           </td>
+        //         </tr>
+        //         <tr className="border-b border-gray-200">
+        //           <td className="py-2 text-right text-sm" colSpan={4}>
+        //             Tax
+        //           </td>
+        //           <td className="py-2 text-right text-sm">
+        //             {data.tax.toFixed(2)}
+        //           </td>
+        //         </tr>
+        //         <tr className="border-b border-gray-200">
+        //           <td className="py-2 text-right text-sm" colSpan={4}>
+        //             Net Total
+        //           </td>
+        //           <td className="py-2 text-right text-sm">
+        //             {data.netTotal.toFixed(2)}
+        //           </td>
+        //         </tr>
+        //       </tfoot>
+        //     </table>
+
+        //     <div className=" text-xs mb-8">
+        //       <div className=" ">
+        //         <h2 className="font-bold mb-2">Payment Transfer to</h2>
+        //         <p>Kpay,Wave - 09250152018</p>
+        //         <p>KBZ Bank - 02730102705025601</p>
+        //         <p>AYA Bank - 20003674121</p>
+        //       </div>
+        //       <div className="  ">
+        //         <h2 className="font-bold text-xl">MMS IT</h2>
+        //         <p>48, 1st Floor, Shan Kone St.</p>
+        //         <p>+959-250-152-018</p>
+        //         <p>enquiry@mms-it.com</p>
+        //       </div>
+        //     </div>
+
+        //     <div className="border-t-2 border-gray-300 pt-4">
+        //       <p className="mt-4 text-center text-sm">Thanks to You</p>
+        //     </div>
+        //   </div>
+        //   <div className="flex flex-col gap-3">
+        //     <button
+        //       className="text-white flex justify-center items-center gap-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        //       onClick={handlePrint}
+        //     >
+        //       Print Voucher
+        //     </button>
+
+        //   </div>
+        // </div>
       )}
     </div>
   );

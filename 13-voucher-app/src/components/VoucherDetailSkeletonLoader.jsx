@@ -2,7 +2,7 @@ import React from "react";
 
 const VoucherDetailSkeletonLoader = () => {
   return (
-    <div>
+    <div className="w-[14.8cm]">
       {/* Header Skeleton */}
       <div className="flex justify-between mb-7">
         <div>

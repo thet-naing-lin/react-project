@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         element: <ProductCreatePage />,
       },
       {
-        path: "/product/edit/:id",
+        path: "/product/edit/:id", // dynamic route
         element: <ProductEditPage />,
       },
       {
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <VoucherPage />,
       },
       {
-        path: "/voucher/detail/:id",
+        path: "/voucher/detail/:id", // dynamic route
         element: <VoucherDetailPage />
       }
     ],

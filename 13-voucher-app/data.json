@@ -244,6 +244,146 @@
       "netTotal": 5565,
       "created_at": "2024-09-27T17:57:29.589Z",
       "id": 3
+    },
+    {
+      "voucher_id": "INV-20241009-7987",
+      "customer_name": "xinnn",
+      "customer_email": "xin@gmail.com",
+      "sale_date": "2024-10-09",
+      "all_correct": "true",
+      "redirect_to_detail": false,
+      "submit": "",
+      "records": [
+        {
+          "id": "b71532eb-c9ca-44ed-a137-607098ef8d4f",
+          "product": {
+            "id": 4,
+            "product_name": "Responsive Website Development",
+            "price": 800,
+            "created_at": "2024-09-11T10:45:00Z"
+          },
+          "quantity": "3",
+          "cost": 2400,
+          "created_at": "2024-10-09T08:07:45.638Z"
+        }
+      ],
+      "total": 2400,
+      "tax": 120,
+      "netTotal": 2520,
+      "created_at": "2024-10-09T08:07:51.840Z",
+      "id": 4
+    },
+    {
+      "voucher_id": "INV-20241009-4251",
+      "customer_name": "Ai Hui",
+      "customer_email": "aihui@gmail.com",
+      "sale_date": "2024-10-09",
+      "all_correct": "true",
+      "redirect_to_detail": "true",
+      "submit": "",
+      "records": [
+        {
+          "id": "7ad964ac-34f7-4553-84f4-8a8626b7e693",
+          "product": {
+            "id": 4,
+            "product_name": "Responsive Website Development",
+            "price": 800,
+            "created_at": "2024-09-11T10:45:00Z"
+          },
+          "quantity": "1",
+          "cost": 800,
+          "created_at": "2024-10-09T08:11:13.921Z"
+        }
+      ],
+      "total": 800,
+      "tax": 40,
+      "netTotal": 840,
+      "created_at": "2024-10-09T08:11:17.220Z",
+      "id": 5
+    },
+    {
+      "voucher_id": "INV-20241009-6707",
+      "customer_name": "xin",
+      "customer_email": "xin@gmail.com",
+      "sale_date": "2024-10-09",
+      "all_correct": "true",
+      "redirect_to_detail": "true",
+      "submit": "",
+      "records": [
+        {
+          "id": "cd55668e-06d6-4876-80d3-8d781c2d07f9",
+          "product": {
+            "id": 3,
+            "product_name": "SEO Optimization Service",
+            "price": 300,
+            "created_at": "2024-09-12T12:00:00Z"
+          },
+          "quantity": "1",
+          "cost": 300,
+          "created_at": "2024-10-09T08:11:50.989Z"
+        }
+      ],
+      "total": 300,
+      "tax": 15,
+      "netTotal": 315,
+      "created_at": "2024-10-09T08:11:56.236Z",
+      "id": 6
+    },
+    {
+      "voucher_id": "INV-20241009-5675",
+      "customer_name": "Tommy",
+      "customer_email": "jimmy@gmail.com",
+      "sale_date": "2024-10-09",
+      "all_correct": "true",
+      "redirect_to_detail": false,
+      "submit": "",
+      "records": [
+        {
+          "id": "a8fe0791-9493-45db-a8ee-1f606eca00ff",
+          "product": {
+            "id": 8,
+            "product_name": "Web Hosting and Deployment",
+            "price": 250,
+            "created_at": "2024-09-07T18:00:00Z"
+          },
+          "quantity": "2",
+          "cost": 500,
+          "created_at": "2024-10-09T08:12:42.025Z"
+        }
+      ],
+      "total": 500,
+      "tax": 25,
+      "netTotal": 525,
+      "created_at": "2024-10-09T08:12:44.756Z",
+      "id": 7
+    },
+    {
+      "voucher_id": "INV-20241009-8442",
+      "customer_name": "chocho",
+      "customer_email": "chocho@gmail.com",
+      "sale_date": "2024-10-09",
+      "all_correct": "true",
+      "redirect_to_detail": "true",
+      "submit": "",
+      "records": [
+        {
+          "id": "9627187f-b23a-4c7d-a4e1-6aea7f16e3ee",
+          "product": {
+            "id": 9,
+            "product_name": "Custom Web Application Development",
+            "price": 2000,
+            "created_at": "2024-09-06T09:45:00Z"
+          },
+          "quantity": "1",
+          "cost": 2000,
+          "created_at": "2024-10-09T08:13:17.056Z"
+        }
+      ],
+      "total": 2000,
+      "tax": 100,
+      "netTotal": 2100,
+      "created_at": "2024-10-09T08:13:29.255Z",
+      "id": 8
     }
   ]
 }

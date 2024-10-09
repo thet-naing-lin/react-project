@@ -50,15 +50,27 @@ const VoucherInfo = () => {
     const created_at = new Date().toISOString();
 
     // console.log({...data, records, total, tax, netTotal});
-    const currentVoucher = { ...data, records, total, tax, netTotal, created_at };
+    const currentVoucher = {
+      ...data,
+      records,
+      total,
+      tax,
+      netTotal,
+      created_at,
+    };
 
-    await fetch(`${import.meta.env.VITE_API_URL}/vouchers`, {
+    console.log(data);
+
+    const resp = await fetch(`${import.meta.env.VITE_API_URL}/vouchers`, {
       method: "POST",
       body: JSON.stringify(currentVoucher),
       headers: {
         "Content-Type": "application/json",
       },
     });
+
+    const json = await resp.json();
+    console.log(json);
 
     toast("Voucher created successfully!", {
       icon: <FcApproval className="text-xl" />,
@@ -72,7 +84,11 @@ const VoucherInfo = () => {
     reset();
     resetRecords();
 
-    navigate("/voucher");
+    if (data.redirect_to_detail) {
+      navigate(`/voucher/detail/${json.id}`);
+    } else {
+      navigate("/voucher");
+    }
 
     setConfirmVoucher(false);
   };
@@ -271,8 +287,25 @@ const VoucherInfo = () => {
 
       <VoucherTable />
 
-      <div className=" flex justify-between items-center gap-5">
+      <div className=" flex justify-between items-center">
         <div className=" flex flex-col gap-1">
+          <div className="flex items-center">
+            <input
+              {...register("redirect_to_detail")}
+              id="redirect_to_detail"
+              type="checkbox"
+              form="voucherInfoForm"
+              defaultValue
+              className={`w-4 h-4 text-teal-400 bg-gray-100 border-teal-400  focus:ring-teal-400 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 rounded`}
+            />
+            <label
+              htmlFor="redirect_to_detail"
+              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 select-none"
+            >
+              Redirect to Voucher Detail
+            </label>
+          </div>
+          
           <div className="flex items-center">
             <input
               {...register("all_correct")}

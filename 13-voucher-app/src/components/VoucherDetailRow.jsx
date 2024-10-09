@@ -10,7 +10,7 @@ const VoucherDetailRow = ({
 }) => {
   // console.log(recordItem);
   return (
-    <tr>
+    <tr className=" text-xs">
       <td className="py-3 px-4 border-t">{index + 1}</td>
       <td className="py-3 px-4 border-t">{product_name}</td>
       <td className="py-3 px-4 border-t text-end">{price}</td>
