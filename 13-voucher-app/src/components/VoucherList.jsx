@@ -42,6 +42,8 @@ const VoucherList = () => {
     fetcher
   );
 
+  console.log(data);
+
   return (
     <div>
       {/* <SearchBtnCreateBtn

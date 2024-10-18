@@ -349,21 +349,6 @@
       "netTotal": 5565,
       "created_at": "2024-09-27T17:57:29.589Z",
       "id": 3
-    },
-    {
-      "voucher_id": "INV-20241015-2698",
-      "customer_name": "Ai Hui",
-      "customer_email": "xin@gmail.com",
-      "sale_date": "2024-10-15",
-      "redirect_to_detail": false,
-      "all_correct": "true",
-      "submit": "",
-      "records": [],
-      "total": 0,
-      "tax": 0,
-      "netTotal": 0,
-      "created_at": "2024-10-15T07:01:32.536Z",
-      "id": 13
     }
   ]
 }
