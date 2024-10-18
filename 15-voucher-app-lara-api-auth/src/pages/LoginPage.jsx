@@ -38,6 +38,7 @@ const LoginPage = () => {
       });
 
       console.log(json.token);
+      
       navigate("/dashboard");
     } else {
       toast.error(json.message);
