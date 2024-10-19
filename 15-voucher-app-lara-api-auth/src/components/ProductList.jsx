@@ -13,10 +13,11 @@ import { Link } from "react-router-dom";
 import { RxCross2 } from "react-icons/rx";
 import { debounce } from "lodash";
 import Pagination from "./Pagination";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import useCookie from "react-use-cookie";
 
 const ProductList = () => {
+  const [token] = useCookie("login_token");
+
   const apiUrl = import.meta.env.VITE_API_URL;
   // console.log(apiUrl);
 
@@ -26,6 +27,13 @@ const ProductList = () => {
 
   const searchInput = useRef();
   // console.log(searchInput);
+
+  const fetcher = (url) =>
+    fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.json());
 
   const { data, isLoading, error } = useSWR(fetchUrl, fetcher);
   // console.log(data);

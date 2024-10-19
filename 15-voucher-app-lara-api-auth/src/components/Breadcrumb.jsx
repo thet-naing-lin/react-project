@@ -10,7 +10,7 @@ const Breadcrumb = ({ currentPageTitle, icon, links }) => {
         <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
           <li className="inline-flex items-center">
             <Link
-              to="/"
+              to="/dashboard"
               className="inline-flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-teal-400 dark:text-gray-400 dark:hover:text-white"
             >
               <TbHomeFilled />
@@ -39,7 +39,7 @@ const Breadcrumb = ({ currentPageTitle, icon, links }) => {
               <IoMdArrowDropright className="size-5" />
               <Link
                 to="#"
-                className="flex items-center gap-1 ms-1 text-sm font-medium text-gray-900 hover:text-teal-400 md:ms-2 dark:text-gray-400 dark:hover:text-white"
+                className="flex items-center gap-2 ms-1 text-sm font-medium text-gray-900 hover:text-teal-400 md:ms-2 dark:text-gray-400 dark:hover:text-white"
               >
                 {icon}
                 {currentPageTitle}

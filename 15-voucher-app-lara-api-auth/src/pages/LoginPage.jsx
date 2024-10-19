@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FcApproval } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
+import useCookie from "react-use-cookie";
 
 const LoginPage = () => {
   const {
@@ -12,6 +13,9 @@ const LoginPage = () => {
   } = useForm();
 
   const navigate = useNavigate();
+
+  const [token, setToken] = useCookie("login_token");
+  const [userCookie, setUserCookie] = useCookie("user");
 
   const handleLoginBtn = async (data) => {
     console.log(data);
@@ -37,8 +41,10 @@ const LoginPage = () => {
         },
       });
 
-      console.log(json.token);
-      
+      console.log(json);
+      setToken(json.token);
+      setUserCookie(JSON.stringify(json.user));
+
       navigate("/dashboard");
     } else {
       toast.error(json.message);
