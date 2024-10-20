@@ -34,7 +34,7 @@ const Header = () => {
                   ? profile_image
                   : "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png"
               }
-              className=" border border-white shadow-lg size-12 rounded-full object-cover object-top"
+              className=" border border-white shadow-lg size-12 rounded-full object-cover"
               alt="user_profile"
             />
             <div>
