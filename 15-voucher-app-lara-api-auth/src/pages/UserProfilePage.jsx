@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Container from "../components/Container";
 import useCookie from "react-use-cookie";
 import Breadcrumb from "../components/Breadcrumb";
@@ -21,6 +21,8 @@ const UserProfilePage = () => {
 
   const { user, setUser } = useUserStore();
 
+  const [changeImage, setChangeImage] = useState(false);
+
   const {
     user: { name, email, profile_image },
   } = useUserStore();
@@ -28,6 +30,7 @@ const UserProfilePage = () => {
   const fileInputRef = useRef(null);
 
   const handleChangeProfileImage = async (event) => {
+    setChangeImage(true);
     const formData = new FormData();
     formData.append("profile_image", event.target.files[0]);
 
@@ -60,6 +63,7 @@ const UserProfilePage = () => {
 
       setUserCookie(JSON.stringify(json.user));
       setUser(json.user);
+      setChangeImage(false);
     } else {
       toast.error(json.message);
     }
@@ -73,6 +77,17 @@ const UserProfilePage = () => {
 
   return (
     <section>
+      {changeImage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-sm">
+          <div className="bg-white p-6 rounded-lg shadow-lg flex gap-5">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-e-2 border-teal-900"></div>
+            <p className="mt-4 text-teal-900 font-semibold">
+              Updating image...
+            </p>
+          </div>
+        </div>
+      )}
+
       <Container>
         <Breadcrumb currentPageTitle={"User Profile"} icon={<FaUser />} />
 
@@ -123,9 +138,12 @@ const UserProfilePage = () => {
                 >
                   Edit Name
                 </Link>
-                <button className="mt-4 text-sm px-3 py-1 bg-teal-900 text-white rounded hover:bg-teal-600">
+                <Link
+                  to={"user-change-password"}
+                  className="mt-4 text-sm px-3 py-1 bg-teal-900 text-white rounded hover:bg-teal-600"
+                >
                   Change Password
-                </button>
+                </Link>
               </div>
             </div>
           </div>

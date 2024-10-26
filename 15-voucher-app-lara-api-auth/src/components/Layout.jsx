@@ -28,7 +28,7 @@ const Layout = () => {
   // console.log(JSON.parse(userCookie));
 
   return (
-    <main className="flex flex-col min-h-screen p-5">
+    <main className="flex flex-col min-h-screen p-5 bg-teal-50">
       <Header />
       <Outlet />
       <Toaster position="top-right" />
