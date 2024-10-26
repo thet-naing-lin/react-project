@@ -5,10 +5,13 @@ import { hourglass } from "ldrs";
 import toast from "react-hot-toast";
 import { FcApproval } from "react-icons/fc";
 import useProductCreateStore from "../stores/useProductCreateStore";
+import useCookie from "react-use-cookie";
 
 hourglass.register();
 
 const ProductCreateCard = () => {
+  const [token] = useCookie("login_token");
+
   const {
     register,
     handleSubmit,
@@ -30,6 +33,8 @@ const ProductCreateCard = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         product_name: data.product_name,
@@ -49,7 +54,7 @@ const ProductCreateCard = () => {
     });
 
     if (data.back_to_product_list) {
-      navigate("/product");
+      navigate("/dashboard/product");
     }
 
     setTimeout(() => setAddingProduct(false), 500);
@@ -179,7 +184,7 @@ const ProductCreateCard = () => {
 
         <div className="flex justify-end">
           <Link
-            to={"/product"}
+            to={"/dashboard/product"}
             className="text-white bg-gray-700 me-3 hover:bg-gray-900 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700"
           >
             Cancel
@@ -195,7 +200,7 @@ const ProductCreateCard = () => {
                 size="15"
                 bg-opacity="0.2"
                 speed="1.25"
-                color="black"
+                color="white"
               ></l-hourglass>
             )}
           </button>

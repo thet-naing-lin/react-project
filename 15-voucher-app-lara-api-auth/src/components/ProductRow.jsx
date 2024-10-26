@@ -8,11 +8,15 @@ import toast from "react-hot-toast";
 import { FcCancel } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import ShowDate from "./ShowDate";
+import useCookie from "react-use-cookie";
 
 const ProductRow = ({
   product: { id, product_name, price, created_at, updated_at },
   index,
 }) => {
+
+  const [token] = useCookie("login_token");
+
   const { mutate } = useSWRConfig();
   const [isDeleting, setIsDeleting] = useState(false);
   // console.log(created_at);
@@ -38,6 +42,10 @@ const ProductRow = ({
 
         const resp = fetch(`${import.meta.env.VITE_API_URL}/products/${id}`, {
           method: "DELETE",
+          headers: {
+            // Accept: "application/json",
+            Authorization: `Bearer ${token}`
+          }
         });
 
         // const json = resp.json();
@@ -80,7 +88,7 @@ const ProductRow = ({
         <div className="inline-flex rounded-md" role="group">
           {/* Edit Button */}
           <Link
-            to={`/product/edit/${id}`}
+            to={`/dashboard/product/edit/${id}`}
             className="w-10 h-8 flex justify-center items-center text-sm 
         text-blue-500 dark:text-blue-700 bg-transparent border-2 
         border-blue-500 rounded-md hover:bg-blue-500 hover:text-white 

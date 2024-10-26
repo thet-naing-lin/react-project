@@ -6,11 +6,14 @@ import toast from "react-hot-toast";
 import { FcApproval } from "react-icons/fc";
 import useSWR, { useSWRConfig } from "swr";
 import ProductEditSkeletonLoader from "./ProductEditSkeletonLoader";
+import useCookie from "react-use-cookie";
 
 hourglass.register();
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+// const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const ProductEditCard = () => {
+  const [token] = useCookie("login_token");
+
   const {
     register,
     handleSubmit,
@@ -26,10 +29,18 @@ const ProductEditCard = () => {
   const { id } = useParams();
   // console.log(id);
 
+  const fetcher = (url) =>
+    fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.json());
+
   const { data, isLoading, error } = useSWR(
     `${import.meta.env.VITE_API_URL}/products/${id}`,
     fetcher
   );
+  // console.log(data);
 
   const handleEditProduct = async (data) => {
     // console.log(data);
@@ -39,6 +50,8 @@ const ProductEditCard = () => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         product_name: data.product_name,
@@ -59,10 +72,9 @@ const ProductEditCard = () => {
 
     mutate(`${import.meta.env.VITE_API_URL}/products/${id}`);
 
-    navigate("/product");
+    navigate("/dashboard/product");
+    console.log(data);
   };
-
-  console.log(data);
 
   return (
     <>
@@ -180,7 +192,7 @@ const ProductEditCard = () => {
 
             <div className="flex justify-end">
               <Link
-                to={"/product"}
+                to={"/dashboard/product"}
                 className="text-white bg-gray-700 me-3 hover:bg-gray-900 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700"
               >
                 Cancel

@@ -21,7 +21,7 @@ const ProductList = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   // console.log(apiUrl);
 
-  // const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
 
   const [fetchUrl, setFetchUrl] = useState(`${apiUrl}/products`);
 
@@ -47,13 +47,14 @@ const ProductList = () => {
 
   const handleSearch = debounce((e) => {
     // console.log(e.target.value);
-    // setSearch(e.target.value);
+    setSearch(e.target.value);
     setFetchUrl(`${apiUrl}/products?q=${e.target.value}`);
   }, 500);
 
   const handleClearSearch = () => {
     setFetchUrl(`${apiUrl}/products`);
     searchInput.current.value = "";
+    setSearch("");
   };
 
   return (
@@ -80,7 +81,7 @@ const ProductList = () => {
             />
           </div>
 
-          {fetchUrl !== `${apiUrl}/products` && (
+          {search && (
             <button onClick={handleClearSearch} className=" hover:scale-75">
               <RxCross2 className=" size-5 font-bold text-red-500 ms-1" />
             </button>
@@ -89,7 +90,7 @@ const ProductList = () => {
 
         <div className="">
           <Link
-            to="/product/create"
+            to="/dashboard/product/create"
             className="flex items-center gap-2 text-white bg-teal-900 hover:scale-95 hover:text-white font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700"
           >
             <FaPlus />
@@ -132,7 +133,7 @@ const ProductList = () => {
               ))
             )}
 
-            {isAddingProduct && (
+            {/* {isAddingProduct && (
               <tr className="animate-pulse bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td className="px-6 py-4">
                   <div className="h-4 w-4 bg-gray-200 rounded dark:bg-gray-700"></div>
@@ -161,7 +162,7 @@ const ProductList = () => {
                   </div>
                 </td>
               </tr>
-            )}
+            )} */}
           </tbody>
         </table>
       </div>
