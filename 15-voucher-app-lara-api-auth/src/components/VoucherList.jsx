@@ -12,9 +12,11 @@ import { Link } from "react-router-dom";
 import { debounce, throttle } from "lodash";
 import { RxCross2 } from "react-icons/rx";
 import Pagination from "./Pagination";
+import useCookie from "react-use-cookie";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const VoucherList = () => {
+  const [token] = useCookie("login_token");
+
   // testing
   // const [search, setSearch] = useState("");
   const [fetchUrl, setFetchUrl] = useState(
@@ -30,6 +32,13 @@ const VoucherList = () => {
   //   // console.log(e.target.value);
   //   setSearch(e.target.value);
   // };
+
+  const fetcher = (url) =>
+    fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.json());
 
   const { data, isLoading, error } = useSWR(fetchUrl, fetcher);
   console.log(data);
@@ -83,7 +92,7 @@ const VoucherList = () => {
 
         <div className="">
           <Link
-            to="/sale"
+            to="/dashboard/sale"
             className="flex items-center gap-2 text-white bg-teal-900 hover:scale-95 hover:text-white font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700"
           >
             <HiShoppingCart className="size-4" />

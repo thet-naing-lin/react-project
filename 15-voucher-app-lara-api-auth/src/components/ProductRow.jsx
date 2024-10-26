@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { RiEdit2Line } from "react-icons/ri";
 import { FaDeleteLeft } from "react-icons/fa6";
-import { useSWRConfig } from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import Swal from "sweetalert2";
 import { lineSpinner } from "ldrs";
 import toast from "react-hot-toast";
@@ -14,8 +14,20 @@ const ProductRow = ({
   product: { id, product_name, price, created_at, updated_at },
   index,
 }) => {
-
   const [token] = useCookie("login_token");
+
+  const fetcher = (url) =>
+    fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.json());
+
+  const { data, isLoading, error } = useSWR(
+    import.meta.env.VITE_API_URL + "/products",
+    fetcher
+  );
+  // console.log(data);
 
   const { mutate } = useSWRConfig();
   const [isDeleting, setIsDeleting] = useState(false);
@@ -44,8 +56,8 @@ const ProductRow = ({
           method: "DELETE",
           headers: {
             // Accept: "application/json",
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         // const json = resp.json();

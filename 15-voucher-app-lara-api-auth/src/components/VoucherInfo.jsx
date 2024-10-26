@@ -7,10 +7,13 @@ import useRecordStore from "../stores/useRecordStore";
 import toast from "react-hot-toast";
 import { FcApproval } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
+import useCookie from "react-use-cookie";
 
 hourglass.register();
 
 const VoucherInfo = () => {
+  const [token] = useCookie("login_token");
+
   const {
     register,
     handleSubmit,
@@ -68,6 +71,7 @@ const VoucherInfo = () => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
 
