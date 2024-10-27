@@ -20,7 +20,7 @@ const ProductList = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   // console.log(apiUrl);
 
-  // const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
 
   const [fetchUrl, setFetchUrl] = useState(`${apiUrl}/products`);
 
@@ -39,13 +39,14 @@ const ProductList = () => {
 
   const handleSearch = debounce((e) => {
     // console.log(e.target.value);
-    // setSearch(e.target.value);
+    setSearch(e.target.value);
     setFetchUrl(`${apiUrl}/products?q=${e.target.value}`);
   }, 500);
 
   const handleClearSearch = () => {
     setFetchUrl(`${apiUrl}/products`);
     searchInput.current.value = "";
+    setSearch("");
   };
 
   return (
@@ -72,7 +73,13 @@ const ProductList = () => {
             />
           </div>
 
-          {fetchUrl !== `${apiUrl}/products` && (
+          {/* {fetchUrl !== `${apiUrl}/products` && (
+            <button onClick={handleClearSearch} className=" hover:scale-75">
+              <RxCross2 className=" size-5 font-bold text-red-500 ms-1" />
+            </button>
+          )} */}
+
+          {search && (
             <button onClick={handleClearSearch} className=" hover:scale-75">
               <RxCross2 className=" size-5 font-bold text-red-500 ms-1" />
             </button>

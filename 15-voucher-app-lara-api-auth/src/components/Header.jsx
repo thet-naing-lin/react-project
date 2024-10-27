@@ -22,12 +22,12 @@ const Header = () => {
       <Container>
         <div className=" flex justify-between items-center">
           <div>
-            <Link to={"/"} className="text-3xl font-bold">
+            <Link to={"/dashboard"} className="text-3xl font-bold">
               Voucher App
             </Link>
             <p className="text-zinc-400">MMS IT Solutions</p>
           </div>
-          <div className=" flex items-center gap-3">
+          <Link to={"/dashboard/user-profile"} className=" flex items-center gap-3">
             <img
               src={
                 profile_image
@@ -41,7 +41,7 @@ const Header = () => {
               <h1 className="text-sm font-bold">{name}</h1>
               <p className="text-zinc-400 text-xs">{email}</p>
             </div>
-          </div>
+          </Link>
         </div>
       </Container>
     </header>

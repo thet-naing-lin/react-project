@@ -5,7 +5,7 @@ import { FaUser } from "react-icons/fa";
 import { PiPasswordFill } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import useCookie from "react-use-cookie";
+import useCookie, { removeCookie } from "react-use-cookie";
 import { FcApproval } from "react-icons/fc";
 import toast from "react-hot-toast";
 import useUserStore from "../stores/useUserStore";
@@ -54,8 +54,9 @@ const UserProfileChangePasswordPage = () => {
         position: "bottom-right",
       });
 
-      setUserCookie(JSON.stringify(json.user));
-      setUser(json.user);
+      // setUserCookie(JSON.stringify(json.user));
+      // setUser(json.user);
+      removeCookie("login_token");
       navigate("/");
     } else {
       toast.error(json.message);

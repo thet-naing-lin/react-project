@@ -18,7 +18,7 @@ const VoucherList = () => {
   const [token] = useCookie("login_token");
 
   // testing
-  // const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
   const [fetchUrl, setFetchUrl] = useState(
     `${import.meta.env.VITE_API_URL}/vouchers`
   );
@@ -48,12 +48,12 @@ const VoucherList = () => {
   };
 
   const handleSearch = debounce((e) => {
-    // setSearch(e.target.value);
+    setSearch(e.target.value);
     setFetchUrl(`${import.meta.env.VITE_API_URL}/vouchers?q=${e.target.value}`);
   }, 500);
 
   const handleClearSearch = () => {
-    // setSearch("");
+    setSearch("");
     searchInput.current.value = "";
     setFetchUrl(`${import.meta.env.VITE_API_URL}/vouchers`);
   };
@@ -83,7 +83,13 @@ const VoucherList = () => {
             />
           </div>
 
-          {fetchUrl !== `${import.meta.env.VITE_API_URL}/vouchers` && (
+          {/* {fetchUrl !== `${import.meta.env.VITE_API_URL}/vouchers` && (
+            <button onClick={handleClearSearch} className=" hover:scale-75">
+              <RxCross2 className=" size-5 font-bold text-red-500 ms-1" />
+            </button>
+          )} */}
+
+          {search && (
             <button onClick={handleClearSearch} className=" hover:scale-75">
               <RxCross2 className=" size-5 font-bold text-red-500 ms-1" />
             </button>

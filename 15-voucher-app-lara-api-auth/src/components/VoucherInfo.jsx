@@ -94,9 +94,9 @@ const VoucherInfo = () => {
       resetRecords();
 
       if (data.redirect_to_detail) {
-        navigate(`/voucher/detail/${json.voucher.id}`);
+        navigate(`/dashboard/voucher/detail/${json.data.id}`);
       } else {
-        navigate("/voucher");
+        navigate("/dashboard/voucher");
       }
 
       setConfirmVoucher(false);
@@ -359,7 +359,7 @@ const VoucherInfo = () => {
                 size="15"
                 bg-opacity="0.2"
                 speed="1.25"
-                color="black"
+                color="white"
               ></l-hourglass>
             )}
           </button>

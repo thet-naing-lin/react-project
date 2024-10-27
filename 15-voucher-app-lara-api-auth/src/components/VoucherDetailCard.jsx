@@ -5,10 +5,18 @@ import VoucherDetailRow from "./VoucherDetailRow";
 import VoucherDetailSkeletonLoader from "./VoucherDetailSkeletonLoader";
 import printJS from "print-js";
 import html2pdf from "html2pdf.js";
+import useCookies from "react-use-cookie";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const VoucherDetailCard = () => {
   const { id } = useParams();
+
+  const [token] = useCookies("login_token");
+  const fetcher = (url) =>
+    fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.json());
 
   const { data, isLoading, error } = useSWR(
     `${import.meta.env.VITE_API_URL}/vouchers/${id}`,

@@ -101,7 +101,7 @@ const VoucherListRow = ({
         <div className="inline-flex rounded-md" role="group">
           {/* Detail Button */}
           <Link
-            to={`/voucher/detail/${id}`}
+            to={`/dashboard/voucher/detail/${id}`}
             className="w-10 h-8 flex justify-center items-center text-sm 
         text-blue-500 dark:text-blue-700 bg-transparent border-2 
         border-blue-500 rounded-md hover:bg-blue-500 hover:text-white 

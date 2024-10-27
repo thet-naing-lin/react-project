@@ -14,7 +14,7 @@ const VoucherDetailPage = () => {
           links={[
             {
               title: "Voucher Module",
-              path: "/voucher",
+              path: "/dashboard/voucher",
               icon: <FaFileInvoiceDollar />,
             },
           ]}
