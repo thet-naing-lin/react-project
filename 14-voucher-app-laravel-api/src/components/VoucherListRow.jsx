@@ -21,6 +21,7 @@ const VoucherListRow = ({
     net_total,
     records,
     created_at,
+    total,
   },
   index,
 }) => {
@@ -86,16 +87,20 @@ const VoucherListRow = ({
 
   return (
     <tr className=" font-header text-sm bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-      <td className="px-6 py-4"> {index + 1}</td>
+      <td className="px-6 py-4"> {index + 1}({id})</td>
 
       <td className="px-6 py-4 font-bold text-nowrap text-xs"> {voucher_id}</td>
-      <th scope="row" className="px-6 py-4  whitespace-nowrap dark:text-white">
-        {customer_name}
+      <th
+        scope="row"
+        className="px-6 py-4  whitespace-nowrap flex flex-col gap-1 dark:text-white"
+      >
+        <span className=" font-bold text-gray-800">{customer_name}</span>
+        <span className=" text-zinc-400 text-xs">{customer_email}</span>
       </th>
-      <td className="px-6 py-4">{customer_email}</td>
+      <td className="px-6 py-4 text-end">{total}</td>
       {/* <td className="px-6 py-4 text-end">{records.length}</td> */}
-      <td className="px-6 py-4 text-end ">
-        <ShowDate timestamp={sale_date} timeOnly={created_at} />
+      <td className="px-6 py-4 text-end text-nowrap">
+        <ShowDate timestamp={created_at} timeOnly={created_at} />
       </td>
       <td className="px-6 py-4 text-end">
         <div className="inline-flex rounded-md" role="group">

@@ -8,17 +8,23 @@ import VoucherListSkeletonLoader from "./VoucherListSkeletonLoader";
 
 import { useState } from "react";
 import { TbMoodSearch } from "react-icons/tb";
-import { Link } from "react-router-dom";
-import { debounce, throttle } from "lodash";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { debounce, set, throttle } from "lodash";
 import { RxCross2 } from "react-icons/rx";
 import Pagination from "./Pagination";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const VoucherList = () => {
+  const location = useLocation();
+  // console.log(location);
+
+  const [params, setParams] = useSearchParams();
+
   // testing
-  // const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
   const [fetchUrl, setFetchUrl] = useState(
-    `${import.meta.env.VITE_API_URL}/vouchers`
+    `${import.meta.env.VITE_API_URL}/vouchers${location.search}`
   );
 
   const searchInput = useRef("");
@@ -32,21 +38,74 @@ const VoucherList = () => {
   // };
 
   const { data, isLoading, error } = useSWR(fetchUrl, fetcher);
-  console.log(data);
+  // console.log(data);
 
   const updateFetchUrl = (url) => {
+    console.log(url); // api က လာတဲ့ url
+
+    const currentUrl = new URL(url); // from api
+    // console.log(currentUrl);
+    // console.log(currentUrl.search);
+
+    const newSearchParams = new URLSearchParams(currentUrl.search);
+    console.log(newSearchParams);
+
+    // for(let a of newSearchParams) {
+    //   console.log(a);
+    // }
+
+    // console.log(params); // browser url မှာရေးထားတဲ့ params
+    // console.log(params.get("a"));
+    // console.log(params.get("b"));
+
+    // const currentParams = params.entries();
+    // console.log(currentParams);
+
+    // for(let x of currentParams) {
+    //   console.log(x);
+    // }
+
+    const paramObj = Object.fromEntries(newSearchParams);
+    // console.log(paramObj);
+
+    // setParams({
+    //   a: 100,
+    //   b: 200
+    // })
+
+    // setParams(currentUrl.search); // ဒီလိုလုပ်လဲ ရတော့ ရတယ်။ side effect ဘာရှိမလဲတော့ ကြည့်ရဦးမယ်
+    setParams(paramObj);
+
     setFetchUrl(url);
   };
 
   const handleSearch = debounce((e) => {
-    // setSearch(e.target.value);
-    setFetchUrl(`${import.meta.env.VITE_API_URL}/vouchers?q=${e.target.value}`);
+    if (e.target.value) {
+      setSearch(e.target.value);
+      setParams({ q: e.target.value });
+
+      setFetchUrl(
+        `${import.meta.env.VITE_API_URL}/vouchers?q=${e.target.value}`
+      );
+    } else {
+      setSearch("");
+      setParams({});
+      setFetchUrl(`${import.meta.env.VITE_API_URL}/vouchers`);
+    }
   }, 500);
 
   const handleClearSearch = () => {
-    // setSearch("");
+    setSearch("");
     searchInput.current.value = "";
+    setParams({});
     setFetchUrl(`${import.meta.env.VITE_API_URL}/vouchers`);
+  };
+
+  const handleSort = (sortData) => {
+    // console.log(sortData);
+    const sortParams = new URLSearchParams(sortData).toString();
+    setParams(sortData);
+    setFetchUrl(`${import.meta.env.VITE_API_URL}/vouchers?${sortParams}`);
   };
 
   return (
@@ -74,7 +133,7 @@ const VoucherList = () => {
             />
           </div>
 
-          {fetchUrl !== `${import.meta.env.VITE_API_URL}/vouchers` && (
+          {search && (
             <button onClick={handleClearSearch} className=" hover:scale-75">
               <RxCross2 className=" size-5 font-bold text-red-500 ms-1" />
             </button>
@@ -97,16 +156,60 @@ const VoucherList = () => {
           <thead className="text-white text-xs uppercase bg-teal-900 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                #
+                <div className="flex items-center gap-1">
+                  <span className=" flex flex-col">
+                    <button
+                      className=" hover:text-teal-300"
+                      onClick={handleSort.bind(null, {
+                        sort_by: "id",
+                        sort_direction: "asc",
+                      })}
+                    >
+                      <IoMdArrowDropup />
+                    </button>
+                    <button
+                      className=" hover:text-teal-300"
+                      onClick={handleSort.bind(null, {
+                        sort_by: "id",
+                        sort_direction: "desc",
+                      })}
+                    >
+                      <IoMdArrowDropdown />
+                    </button>
+                  </span>
+                  <span>#</span>
+                </div>
               </th>
               <th scope="col" className="px-6 py-3">
                 Voucher ID
               </th>
               <th scope="col" className="px-6 py-3 text-nowrap">
-                Customer Name
+                Customer Info
               </th>
-              <th scope="col" className="px-6 py-3">
-                Email
+              <th scope="col" className="px-6 py-3 text-end">
+                <div className="flex items-center gap-1">
+                  <span className=" flex flex-col">
+                    <button
+                      className=" hover:text-teal-300"
+                      onClick={handleSort.bind(null, {
+                        sort_by: "total",
+                        sort_direction: "asc",
+                      })}
+                    >
+                      <IoMdArrowDropup />
+                    </button>
+                    <button
+                      className=" hover:text-teal-300"
+                      onClick={handleSort.bind(null, {
+                        sort_by: "total",
+                        sort_direction: "desc",
+                      })}
+                    >
+                      <IoMdArrowDropdown />
+                    </button>
+                  </span>
+                  <span>Total</span>
+                </div>
               </th>
               {/* <th scope="col" className="px-6 py-3 text-end text-nowrap">
                 Item Count
