@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Profiler, useState } from "react";
 import CreateTask from "./components/CreateTask";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
@@ -41,14 +41,40 @@ const App = () => {
   };
 
   const doneTask = (id) => {
-    setTask(tasks.map( el => el.id === id ? {...el, isDone : !el.isDone} : el))
-  }
+    setTask(
+      tasks.map((el) => (el.id === id ? { ...el, isDone: !el.isDone } : el))
+    );
+  };
+
+  const onRender = (
+    id,
+    phase,
+    actualDuration,
+    baseDuration,
+    startTime,
+    commitTime,
+    interactions
+  ) => {
+    // console.log({
+    //   id,
+    //   phase,
+    //   actualDuration,
+    //   baseDuration,
+    //   startTime,
+    //   commitTime,
+    //   interactions,
+    // });
+  };
+
+  console.log("app components rendered");
 
   return (
     <div className="p-10">
-      <Header />
-      <CreateTask addTask={addTask} />
-      <TaskList tasks={tasks} removeTask={removeTask} doneTask={doneTask} />
+      <Profiler id="app" onRender={onRender}>
+        <Header />
+        <CreateTask addTask={addTask} />
+        <TaskList tasks={tasks} removeTask={removeTask} doneTask={doneTask} />
+      </Profiler>
     </div>
   );
 };
