@@ -19,6 +19,7 @@ const LoginForm = () => {
   const [userCookie, setUserCookie] = useCookie("user");
 
   const handleLoginBtn = async (data) => {
+    // use services
     const resp = await login(data);
 
     const json = await resp.json();

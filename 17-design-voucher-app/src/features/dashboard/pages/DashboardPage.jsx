@@ -16,7 +16,7 @@ const DashboardPage = () => {
             <ModuleButton
               name={"Product Module"}
               icon={<AiFillProduct className="size-10" />}
-              url={"/dashboard/product"}
+              url={"/dashboard/products"}
             />
           </div>
           <div className="col-span-1 row-span-1">

@@ -1,9 +1,9 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { register as registerAccount } from "../../../services/auth";
 import { useForm } from "react-hook-form";
 import { FcApproval } from "react-icons/fc";
-import toast from "react-hot-toast";
+import { register as registerAccount } from "../../../services/auth";
 
 const RegisterForm = () => {
   const {
@@ -15,6 +15,7 @@ const RegisterForm = () => {
   const navigate = useNavigate();
 
   const handleRegisterBtn = async (data) => {
+    // use services
     const resp = await registerAccount(data);
 
     const json = await resp.json();

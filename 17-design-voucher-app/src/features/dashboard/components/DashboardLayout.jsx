@@ -1,9 +1,9 @@
 import React, { Suspense, useEffect } from "react";
 import Header from "./Header";
 import { Navigate, Outlet } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 import useCookie from "react-use-cookie";
 import useUserStore from "../../../stores/useUserStore";
+import PageLoading from "../../../components/PageLoading";
 
 const DashboardLayout = () => {
   const [token] = useCookie("login_token");
@@ -21,7 +21,9 @@ const DashboardLayout = () => {
   return (
     <main className="flex flex-col min-h-screen p-5 bg-teal-50">
       <Header />
-      <Outlet />
+      <Suspense fallback={<PageLoading />}>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };
