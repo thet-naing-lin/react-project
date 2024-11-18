@@ -80,9 +80,12 @@ const ProductRow = ({
   };
 
   return (
-    <tr className="bg-white border-b  hover:bg-gray-50 ">
-      <td className="px-6 py-4">{index + 1}</td>
-      <th scope="row" className="px-6 py-4 font-medium text-gray-900 ">
+    <tr className="bg-white border-b text-sm hover:bg-gray-50 ">
+      <td className="px-6 py-4">{index + 1}({id})</td>
+      <th
+        scope="row"
+        className="px-6 py-4 text-nowrap font-medium text-gray-900 "
+      >
         {product_name}
       </th>
       <td className="px-6 py-4 text-end">{price}</td>

@@ -1,48 +1,68 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { FaPlus } from "react-icons/fa";
 import useSWR from "swr";
 import { TbMoodSearch } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { RxCross2 } from "react-icons/rx";
 import { debounce } from "lodash";
-import useCookie from "react-use-cookie";
-import useProductCreateStore from "../../../stores/useProductCreateStore";
 import ProductTableLoader from "./ProductTableLoader";
 import ProductTableEmptyStage from "./ProductTableEmptyStage";
 import ProductRow from "./ProductRow";
 import { fetchProducts } from "../../../services/product";
+import Pagination from "../../../components/Pagination";
+import { urlToParamObj } from "../../../utils/url";
+import Sortable from "../../../components/Sortable";
 
 const ProductTable = () => {
-  const [token] = useCookie("login_token");
-
   const apiUrl = import.meta.env.VITE_API_URL;
-  // console.log(apiUrl);
+
+  const [params, setParams] = useSearchParams();
 
   const [search, setSearch] = useState("");
 
-  const [fetchUrl, setFetchUrl] = useState(`${apiUrl}/products`);
+  const location = useLocation();
 
   const searchInput = useRef();
-  // console.log(searchInput);
 
+  useEffect(() => {
+    if (params.get("q")) {
+      searchInput.current.value = params.get("q");
+    }
+  }, []);
+
+  const [fetchUrl, setFetchUrl] = useState(
+    `${apiUrl}/products${location.search}`
+  );
 
   const { data, isLoading, error } = useSWR(fetchUrl, fetchProducts);
 
-  const { isAddingProduct } = useProductCreateStore();
-
   const updateFetchUrl = (url) => {
     setFetchUrl(url);
+    // using urlToParamObj from util folder (separate code)
+    setParams(urlToParamObj(url));
+  };
+
+  const handleSort = (sortData) => {
+    const sortParams = new URLSearchParams(sortData).toString();
+    setParams(sortData);
+    setFetchUrl(`${import.meta.env.VITE_API_URL}/products?${sortParams}`);
   };
 
   const handleSearch = debounce((e) => {
-    setSearch(e.target.value);
-    setFetchUrl(`${apiUrl}/products?q=${e.target.value}`);
+    if (e.target.value) {
+      setParams({ q: e.target.value });
+      setFetchUrl(`${apiUrl}/products?q=${e.target.value}`);
+    } else {
+      setParams({});
+      setFetchUrl(`${apiUrl}/products`);
+    }
   }, 500);
 
   const handleClearSearch = () => {
     setFetchUrl(`${apiUrl}/products`);
     searchInput.current.value = "";
+    setParams({});
     setSearch("");
   };
 
@@ -64,13 +84,12 @@ const ProductTable = () => {
               type="text"
               onChange={handleSearch}
               ref={searchInput}
-              id="input-group-1"
               className="text-end bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  "
               placeholder="Search Products"
             />
           </div>
 
-          {search && (
+          {fetchUrl !== `${apiUrl}/products` && (
             <button onClick={handleClearSearch} className=" hover:scale-75">
               <RxCross2 className=" size-5 font-bold text-red-500 ms-1" />
             </button>
@@ -89,16 +108,22 @@ const ProductTable = () => {
       </div>
       <div className="font-body mt-5 relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-left rtl:text-right text-gray-500 ">
-          <thead className=" text-white text-sm uppercase bg-teal-900">
+          <thead className=" text-white text-xs uppercase bg-teal-900">
             <tr>
               <th scope="col" className="px-6 py-3">
-                #
+                <Sortable handleSort={handleSort} sort_by="id">
+                  #
+                </Sortable>
               </th>
               <th scope="col" className="px-6 py-3">
-                Title
+                <Sortable handleSort={handleSort} sort_by="product_name">
+                  Title
+                </Sortable>
               </th>
               <th scope="col" className="px-6 py-3 text-end text-nowrap">
-                Price (mmk)
+                <Sortable handleSort={handleSort} sort_by="price" align={"right"}>
+                  Price (mmk)
+                </Sortable>
               </th>
               <th scope="col" className="px-6 py-3 text-end text-nowrap">
                 Created At
@@ -125,13 +150,13 @@ const ProductTable = () => {
         </table>
       </div>
 
-      {/* {!isLoading && (
+      {!isLoading && (
         <Pagination
           links={data?.links}
           meta={data?.meta}
           updateFetchUrl={updateFetchUrl}
         />
-      )} */}
+      )}
     </div>
   );
 };
