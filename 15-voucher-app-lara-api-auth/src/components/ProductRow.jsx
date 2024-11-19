@@ -55,12 +55,9 @@ const ProductRow = ({
         const resp = fetch(`${import.meta.env.VITE_API_URL}/products/${id}`, {
           method: "DELETE",
           headers: {
-            // Accept: "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
-
-        // const json = resp.json();
 
         mutate(`${import.meta.env.VITE_API_URL}/products`);
 

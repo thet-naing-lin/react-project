@@ -9,6 +9,7 @@ import { FcCancel } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import useCookie from "react-use-cookie";
 import ShowDateTime from "../../../components/ShowDateTime";
+import { destroyProduct } from "../../../services/product";
 
 const ProductRow = ({
   product: { id, product_name, price, created_at, updated_at },
@@ -27,17 +28,13 @@ const ProductRow = ({
     import.meta.env.VITE_API_URL + "/products",
     fetcher
   );
-  // console.log(data);
 
   const { mutate } = useSWRConfig();
   const [isDeleting, setIsDeleting] = useState(false);
-  // console.log(created_at);
   lineSpinner.register();
 
   const handleDeleteBtn = async () => {
-    // console.log(id);
-
-    await Swal.fire({
+    const userConfirmation = await Swal.fire({
       title: "Are you sure to delete?",
       text: `(${product_name})`,
       icon: "warning",
@@ -48,40 +45,46 @@ const ProductRow = ({
         confirmButton: "swal-confirm-text",
         text: "swal-text",
       },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setIsDeleting(true);
-
-        const resp = fetch(`${import.meta.env.VITE_API_URL}/products/${id}`, {
-          method: "DELETE",
-          headers: {
-            // Accept: "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        // const json = resp.json();
-
-        mutate(`${import.meta.env.VITE_API_URL}/products`);
-
-        toast(`${product_name} deleted successfully`, {
-          icon: <FcCancel className="text-xl" />,
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-          position: "bottom-right",
-        });
-      }
     });
 
-    mutate(`${import.meta.env.VITE_API_URL}/products`);
+    // isConfirmed is from SweetAlert
+    if (userConfirmation.isConfirmed) {
+      setIsDeleting(true);
+
+      try {
+        const resp = await destroyProduct(id);
+
+        const json = await resp.json();
+
+        if (resp.ok) {
+          mutate(`${import.meta.env.VITE_API_URL}/products`);
+
+          toast(`${product_name} deleted successfully`, {
+            icon: <FcCancel className="text-xl" />,
+            style: {
+              borderRadius: "10px",
+              background: "#333",
+              color: "#fff",
+            },
+            position: "bottom-right",
+          });
+        } else {
+          toast.error(json.message);
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("Error deleting product");
+      } finally {
+        setIsDeleting(false);
+      }
+    }
   };
 
   return (
     <tr className="bg-white border-b text-sm hover:bg-gray-50 ">
-      <td className="px-6 py-4">{index + 1}({id})</td>
+      <td className="px-6 py-4">
+        {index + 1}({id})
+      </td>
       <th
         scope="row"
         className="px-6 py-4 text-nowrap font-medium text-gray-900 "
@@ -100,7 +103,7 @@ const ProductRow = ({
         <div className="inline-flex rounded-md" role="group">
           {/* Edit Button */}
           <Link
-            to={`/dashboard/product/edit/${id}`}
+            to={`/dashboard/product-edit/${id}`}
             className="w-10 h-8 flex justify-center items-center text-sm 
         text-blue-500  bg-transparent border-2 
         border-blue-500 rounded-md hover:bg-blue-500 hover:text-white 
