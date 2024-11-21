@@ -35,7 +35,7 @@ const ProductTable = () => {
     `${apiUrl}/products${location.search}`
   );
 
-  const { data, isLoading, error } = useSWR(fetchUrl, fetchProducts);
+  const { data, isLoading } = useSWR(fetchUrl, fetchProducts);
 
   const updateFetchUrl = (url) => {
     setFetchUrl(url);
@@ -51,11 +51,15 @@ const ProductTable = () => {
 
   const handleSearch = debounce((e) => {
     if (e.target.value) {
+      setSearch(e.target.value);
+
       setParams({ q: e.target.value });
       setFetchUrl(`${apiUrl}/products?q=${e.target.value}`);
     } else {
-      setParams({});
       setFetchUrl(`${apiUrl}/products`);
+      searchInput.current.value = "";
+      setParams({});
+      setSearch("");
     }
   }, 500);
 
@@ -89,7 +93,13 @@ const ProductTable = () => {
             />
           </div>
 
-          {fetchUrl !== `${apiUrl}/products` && (
+          {/* {fetchUrl !== `${apiUrl}/products` && (
+            <button onClick={handleClearSearch} className=" hover:scale-75">
+              <RxCross2 className=" size-5 font-bold text-red-500 ms-1" />
+            </button>
+          )} */}
+
+          {search && (
             <button onClick={handleClearSearch} className=" hover:scale-75">
               <RxCross2 className=" size-5 font-bold text-red-500 ms-1" />
             </button>

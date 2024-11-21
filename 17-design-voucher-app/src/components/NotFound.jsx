@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useCookie from "react-use-cookie";
 
 const NotFound = () => {
+  const [user] = useCookie("user");
+
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="py-8 px-4 mx-auto max-w-screen-xl min-h-screen lg:py-16 lg:px-6 flex items-center">
@@ -18,10 +21,19 @@ const NotFound = () => {
           </p>
           <Link
             to="/"
-            className="inline-flex text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-teal-900 my-4"
+            className="inline-flex me-5 text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-teal-900 my-4"
           >
             Back to Homepage
           </Link>
+
+          {user && (
+            <Link
+              to="/dashboard"
+              className="inline-flex text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-teal-900 my-4"
+            >
+              Back to Dashboard
+            </Link>
+          )}
         </div>
       </div>
     </section>

@@ -30,7 +30,7 @@ const DashboardPage = () => {
             <ModuleButton
               name={"Voucher Module"}
               icon={<SiPaperswithcode className="size-10" />}
-              url={"/dashboard/voucher"}
+              url={"/dashboard/vouchers"}
             />
           </div>
           <div className="col-span-1 row-span-1">

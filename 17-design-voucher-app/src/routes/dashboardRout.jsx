@@ -1,6 +1,8 @@
 import DashboardLayout from "../features/dashboard/components/DashboardLayout";
 import DashboardPage from "../features/dashboard/pages/DashboardPage";
 import productRout from "./productRout";
+import saleRout from "./saleRout";
+import voucherRout from "./voucherRout";
 
 const dashboardRout = [
   {
@@ -12,6 +14,8 @@ const dashboardRout = [
         element: <DashboardPage />,
       },
       ...productRout,
+      ...voucherRout,
+      ...saleRout,
     ],
   },
 ];
