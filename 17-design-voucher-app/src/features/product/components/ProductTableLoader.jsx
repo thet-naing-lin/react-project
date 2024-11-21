@@ -1,7 +1,11 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 
 const ProductTableLoader = () => {
-  const rows = Array(5).fill(null); // Create an array with 5 elements
+  const [params, setParams] = useSearchParams();
+  const currentLimit = params.get("limit") ?? 5;
+
+  const rows = Array(parseInt(currentLimit)).fill(null); // Create an array with 5 elements
 
   return (
     <>

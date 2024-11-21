@@ -121,7 +121,11 @@ const ProductTable = () => {
                 </Sortable>
               </th>
               <th scope="col" className="px-6 py-3 text-end text-nowrap">
-                <Sortable handleSort={handleSort} sort_by="price" align={"right"}>
+                <Sortable
+                  handleSort={handleSort}
+                  sort_by="price"
+                  align={"right"}
+                >
                   Price (mmk)
                 </Sortable>
               </th>
@@ -150,13 +154,13 @@ const ProductTable = () => {
         </table>
       </div>
 
-      {!isLoading && (
+      {
         <Pagination
           links={data?.links}
           meta={data?.meta}
           updateFetchUrl={updateFetchUrl}
         />
-      )}
+      }
     </div>
   );
 };

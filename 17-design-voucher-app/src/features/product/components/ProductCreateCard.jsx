@@ -16,17 +16,18 @@ const ProductCreateCard = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors , isSubmitting },
     reset,
   } = useForm();
 
   const navigate = useNavigate();
 
-  const { setAddingProduct, isAddingProduct } = useProductCreateStore();
+  // cuz of used isSubmitting i comment it
+  // const { setAddingProduct, isAddingProduct } = useProductCreateStore();
 
   const handleCreateProduct = async (data) => {
     try {
-      setAddingProduct(true);
+      // setAddingProduct(true);
 
       const resp = await createProduct(data.product_name, data.price);
 
@@ -51,11 +52,11 @@ const ProductCreateCard = () => {
         navigate("/dashboard/products");
       }
 
-      setTimeout(() => setAddingProduct(false), 500);
+      // setTimeout(() => setAddingProduct(false), 500);
     } catch {
       toast.error("Error creating product");
     } finally {
-      setAddingProduct(false);
+      // setAddingProduct(false);
     }
   };
 
@@ -191,10 +192,11 @@ const ProductCreateCard = () => {
 
           <button
             type="submit"
-            className=" inline-flex gap-1 justify-center px-5 py-2.5 text-black bg-teal-400 hover:bg-teal-500 hover:text-white  font-medium rounded-lg text-sm w-full sm:w-auto  text-center"
+            disabled={isSubmitting}
+            className=" inline-flex gap-1 justify-center px-5 py-2.5 text-black bg-teal-400 hover:bg-teal-500 hover:text-white  font-medium rounded-lg text-sm w-full sm:w-auto  text-center disabled:pointer-events-none disable:opacity-50"
           >
             Create
-            {isAddingProduct && (
+            {isSubmitting && (
               <l-hourglass
                 size="15"
                 bg-opacity="0.2"

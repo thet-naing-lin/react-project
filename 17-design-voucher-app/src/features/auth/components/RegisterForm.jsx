@@ -4,12 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FcApproval } from "react-icons/fc";
 import { register as registerAccount } from "../../../services/auth";
+import { ring2 } from "ldrs";
+
+ring2.register();
 
 const RegisterForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { isSubmitting },
   } = useForm();
 
   const navigate = useNavigate();
@@ -136,9 +139,21 @@ const RegisterForm = () => {
       </div>
       <button
         type="submit"
-        className="w-full text-white bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
+        disabled={isSubmitting}
+        className="w-full text-white bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800 disabled:pointer-events-none disabled:opacity-40"
       >
-        Create an account
+        {isSubmitting ? (
+          <l-ring-2
+            size="20"
+            stroke="3"
+            stroke-length="0.25"
+            bg-opacity="0.1"
+            speed="1"
+            color="white"
+          ></l-ring-2>
+        ) : (
+          "Create an account"
+        )}
       </button>
       <p className="text-sm font-light text-gray-500 dark:text-gray-400">
         Already have an account?

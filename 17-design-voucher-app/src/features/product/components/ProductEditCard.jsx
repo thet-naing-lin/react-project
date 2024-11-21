@@ -17,13 +17,12 @@ const ProductEditCard = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm();
 
   const navigate = useNavigate();
 
-  const [isCreating, setIsCreating] = useState(false);
   const { mutate } = useSWRConfig();
 
   const { id } = useParams();
@@ -35,8 +34,6 @@ const ProductEditCard = () => {
 
   const handleEditProduct = async (data) => {
     try {
-      setIsCreating(true);
-
       const resp = await editProduct(id, data.product_name, data.price);
 
       if (resp.status === 200) {
@@ -58,8 +55,6 @@ const ProductEditCard = () => {
     } catch (error) {
       console.error(error);
       toast.error("Error updating product");
-    } finally {
-      setIsCreating(false);
     }
   };
 
@@ -187,15 +182,16 @@ const ProductEditCard = () => {
 
               <button
                 type="submit"
-                className=" inline-flex gap-1 px-5 py-2.5 justify-center text-center text-black bg-teal-400 hover:bg-teal-500 hover:text-white  font-medium rounded-lg text-sm w-full sm:w-auto"
+                disabled={isSubmitting}
+                className=" inline-flex gap-1 px-5 py-2.5 justify-center text-center text-black bg-teal-400 hover:bg-teal-500 hover:text-white  font-medium rounded-lg text-sm w-full sm:w-auto disabled:pointer-events-none disable:opacity-50"
               >
                 Update
-                {isCreating && (
+                {isSubmitting && (
                   <l-hourglass
                     size="15"
                     bg-opacity="0.2"
                     speed="1.25"
-                    color="black"
+                    color="white"
                   ></l-hourglass>
                 )}
               </button>

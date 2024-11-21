@@ -6,6 +6,7 @@ const LogoutButton = () => {
   const navigate = useNavigate();
   const handleLogoutBtn = () => {
     removeCookie("login_token");
+    removeCookie("user");
     navigate("/");
   };
 
