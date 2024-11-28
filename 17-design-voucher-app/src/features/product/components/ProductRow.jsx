@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { lineSpinner } from "ldrs";
 import toast from "react-hot-toast";
 import { FcCancel } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useCookie from "react-use-cookie";
 import ShowDateTime from "../../../components/ShowDateTime";
 import { destroyProduct } from "../../../services/product";
@@ -28,6 +28,8 @@ const ProductRow = ({
     import.meta.env.VITE_API_URL + "/products",
     fetcher
   );
+
+  const location = useLocation();
 
   const { mutate } = useSWRConfig();
   const [isDeleting, setIsDeleting] = useState(false);
@@ -57,7 +59,17 @@ const ProductRow = ({
         const json = await resp.json();
 
         if (resp.ok) {
-          mutate(`${import.meta.env.VITE_API_URL}/products`);
+          // This is using window.location.search ****************
+          // const currentURL = `${import.meta.env.VITE_API_URL}/products${
+          //   window.location.search
+          // }`;
+          // mutate(currentURL); // Refresh cache for the specific URL
+
+          // It's better to use useLocation instead of window.location.search cuz of react app ****************
+          const currentURL = `${import.meta.env.VITE_API_URL}/products${
+            location.search
+          }`;
+          mutate(currentURL);
 
           toast(`${product_name} deleted successfully`, {
             icon: <FcCancel className="text-xl" />,

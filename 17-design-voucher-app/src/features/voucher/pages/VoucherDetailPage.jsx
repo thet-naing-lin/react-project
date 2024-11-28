@@ -2,6 +2,7 @@ import React from "react";
 import { FaFileInvoiceDollar, FaInfoCircle } from "react-icons/fa";
 import Container from "../../../components/Container";
 import BreadCrumb from "../../../components/BreadCrumb";
+import VoucherDetailCard from "../components/VoucherDetailCard";
 
 const VoucherDetailPage = () => {
   return (
@@ -18,7 +19,7 @@ const VoucherDetailPage = () => {
             },
           ]}
         />
-        {/* <VoucherDetailCard /> */}
+        <VoucherDetailCard />
       </Container>
     </div>
   );

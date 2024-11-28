@@ -6,10 +6,11 @@ import { FcCancel } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { lineSpinner } from "ldrs";
 import { FaInfoCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ShowDateTime from "../../../components/ShowDateTime";
 import Avatar from "react-avatar";
 import { IoCalendarOutline } from "react-icons/io5";
+import { destroyVoucher } from "../../../services/voucher";
 
 lineSpinner.register();
 
@@ -27,8 +28,6 @@ const VoucherRow = ({
   },
   index,
 }) => {
-  // console.log(records);
-
   const date = new Date(sale_date);
 
   const currentDate = date.toLocaleDateString("en-GB", {
@@ -49,10 +48,10 @@ const VoucherRow = ({
 
   const { mutate } = useSWRConfig();
 
-  const handleDeleteVoucherBtn = async () => {
-    // console.log(id);
+  const location = useLocation();
 
-    await Swal.fire({
+  const handleDeleteVoucherBtn = async () => {
+    const userConfirmation = await Swal.fire({
       title: `Are you sure to delete customer "${customer_name}"?`,
       icon: "warning",
       showCancelButton: true,
@@ -62,29 +61,42 @@ const VoucherRow = ({
         confirmButton: "swal-confirm-text",
         text: "swal-text",
       },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setIsDeleting(true);
-
-        fetch(`${import.meta.env.VITE_API_URL}/vouchers/${id}`, {
-          method: "DELETE",
-        });
-
-        mutate(`${import.meta.env.VITE_API_URL}/vouchers`);
-
-        toast(`${customer_name} deleted successfully`, {
-          icon: <FcCancel className="text-xl" />,
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-          position: "bottom-right",
-        });
-      }
     });
 
-    mutate(`${import.meta.env.VITE_API_URL}/vouchers`);
+    // isConfirmed is from SweetAlert
+    if (userConfirmation.isConfirmed) {
+      setIsDeleting(true);
+
+      try {
+        const resp = await destroyVoucher(id);
+
+        const json = await resp.json();
+
+        if (resp.ok) {
+          const currentURL = `${import.meta.env.VITE_API_URL}/vouchers${
+            location.search
+          }`;
+          mutate(currentURL);
+
+          toast(`${customer_name} deleted successfully`, {
+            icon: <FcCancel className="text-xl" />,
+            style: {
+              borderRadius: "10px",
+              background: "#333",
+              color: "#fff",
+            },
+            position: "bottom-right",
+          });
+        } else {
+          toast.error(json.message);
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("Error deleting voucher");
+      } finally {
+        setIsDeleting(false);
+      }
+    }
   };
 
   return (
@@ -123,7 +135,7 @@ const VoucherRow = ({
         <div className="inline-flex rounded-md" role="group">
           {/* Detail Button */}
           <Link
-            to={`/voucher/detail/${id}`}
+            to={`/dashboard/voucher-detail/${id}`}
             className="w-10 h-8 flex justify-center items-center text-sm 
         text-blue-500 bg-transparent border-2 
         border-blue-500 rounded-md hover:bg-blue-500 hover:text-white 

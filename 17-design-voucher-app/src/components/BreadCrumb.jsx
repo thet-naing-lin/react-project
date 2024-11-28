@@ -1,11 +1,23 @@
 import React from "react";
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 import { IoMdArrowDropright } from "react-icons/io";
 import { TbHomeFilled } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const BreadCrumb = ({ currentPageTitle, icon, links }) => {
+
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
+  const handleGoForward = () => {
+    navigate(1);
+  };
+
   return (
-    <div className="w-full flex gap-2 mb-5 font-body">
+    <div className="w-full flex justify-between items-center gap-2 mb-5 font-body">
       <nav className="flex" aria-label="Breadcrumb">
         <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
           <li className="inline-flex items-center">
@@ -48,6 +60,14 @@ const BreadCrumb = ({ currentPageTitle, icon, links }) => {
           </li>
         </ol>
       </nav>
+      <div className="flex item-center gap-1">
+        <button className=" hover:scale-105 active:scale-95" onClick={handleGoBack}>
+          <FaArrowAltCircleLeft className=" size-5"/>
+        </button>
+        <button className=" hover:scale-105 active:scale-95" onClick={handleGoForward}>
+          <FaArrowAltCircleRight className=" size-5"/>
+        </button>
+      </div>
     </div>
   );
 };
