@@ -16,3 +16,15 @@ export const destroyVoucher = (id) => {
     },
   });
 };
+
+export const storeVoucher = (currentVoucher) => {
+  return fetch(`${import.meta.env.VITE_API_URL}/vouchers`, {
+    method: "POST",
+    body: JSON.stringify(currentVoucher),
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${getCookie("login_token")}`,
+    },
+  });
+};

@@ -17,7 +17,7 @@ const BreadCrumb = ({ currentPageTitle, icon, links }) => {
   };
 
   return (
-    <div className="w-full flex justify-between items-center gap-2 mb-5 font-body">
+    <div className="w-full flex justify-between items-center gap-2 mb-5 font-body border-y py-2">
       <nav className="flex" aria-label="Breadcrumb">
         <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
           <li className="inline-flex items-center">
